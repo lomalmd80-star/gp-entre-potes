@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>GP Entre Potes — MotoGP Fantasy 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700;900&family=Roboto+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0a;--c1:#151515;--c2:#1e1e1e;--c3:#282828;--bd:#333;--t1:#fff;--t2:#aaa;--t3:#666;--red:#e10600;--yel:#ffd700;--grn:#00c853;--blu:#2979ff;--ff:'Roboto Condensed',sans-serif;--fb:'Titillium Web',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--t1);font-family:var(--fb);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+input,select,button,textarea{font-family:inherit;box-sizing:border-box}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:#111}::-webkit-scrollbar-thumb{background:#444;border-radius:9px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes glow{0%,100%{box-shadow:0 0 6px #e1060044}50%{box-shadow:0 0 16px #e1060066}}
+@keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@keyframes liveDot{0%,100%{background:#e10600}50%{background:#ff4444}}
+#bgD{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bgs{position:absolute;background:linear-gradient(135deg,#e1060008,transparent 50%)}
+.bgs:nth-child(1){top:-15%;right:-8%;width:70%;height:50%;transform:rotate(-12deg);animation:bgFloat 20s ease-in-out infinite}
+.bgs:nth-child(2){bottom:-8%;left:-12%;width:60%;height:40%;transform:rotate(18deg);background:linear-gradient(135deg,#ffd70006,transparent 50%);animation:bgFloat 25s ease-in-out infinite reverse}
+.bgg{position:absolute;inset:0;background-image:radial-gradient(circle,#ffffff04 1px,transparent 1px);background-size:28px 28px}
+.bg-lines{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 98px,#e1060003 98px,#e1060003 100px);animation:bgScroll 8s linear infinite}
+.bg-checker{position:absolute;bottom:0;left:0;right:0;height:60px;background:repeating-conic-gradient(#ffffff03 0% 25%,transparent 0% 50%);background-size:20px 20px;opacity:.5}
+.particle{position:absolute;pointer-events:none;animation:particleUp linear infinite}
+.particle.beam{width:2px;border-radius:2px}
+.particle.orb{border-radius:50%}
+@keyframes particleUp{0%{transform:translateY(0) scale(.5);opacity:0}5%{opacity:1}85%{opacity:.8}100%{transform:translateY(-110vh) scale(.3);opacity:0}}
+@keyframes particleDrift{0%{transform:translate(0,0)}25%{transform:translate(30px,-25vh)}50%{transform:translate(-20px,-50vh)}75%{transform:translate(40px,-75vh)}100%{transform:translate(0,-100vh)}}
+.particle.drift{animation:particleDrift linear infinite}
+@keyframes bgFloat{0%,100%{transform:rotate(-12deg) scale(1)}50%{transform:rotate(-10deg) scale(1.05)}}
+@keyframes bgScroll{0%{transform:translateX(0)}100%{transform:translateX(-100px)}}
+header{position:sticky;top:0;z-index:80;background:#111e;backdrop-filter:blur(12px);display:none}header.on{display:block}
+.hs{height:3px;background:linear-gradient(90deg,var(--red),var(--yel),var(--red))}
+.hi{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:46px;padding:0 14px}
+.ham{background:none;border:none;cursor:pointer;padding:8px}.ham span{display:block;width:20px;height:2px;background:#fff;margin-bottom:5px;border-radius:9px;transition:.2s}
+.ham.x span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.ham.x span:nth-child(2){opacity:0}.ham.x span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.dd{position:absolute;top:49px;right:10px;width:200px;background:#1a1a1a;border:1px solid var(--bd);border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.6);display:none;overflow:hidden;animation:slideIn .2s;z-index:100}
+.dd.on{display:block}.dd button{display:flex;align-items:center;gap:8px;width:100%;padding:11px 14px;background:none;border:none;cursor:pointer;font-size:12px;font-weight:600;color:#ccc;transition:.1s}.dd button:hover{background:#222;color:#fff}.dd .sep{height:1px;background:#333;margin:2px 10px}
+.mu{position:fixed;bottom:14px;right:14px;z-index:90;width:38px;height:38px;border-radius:50%;background:var(--red);color:#fff;border:2px solid #ff444433;cursor:pointer;font-size:14px;display:none;animation:glow 2s infinite}
+main{max-width:960px;margin:0 auto;padding:14px;position:relative;z-index:1}
+.pg{display:none;animation:fadeUp .3s}.pg.on{display:block}
+.bt{padding:10px 20px;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-family:var(--ff);font-size:12px;text-transform:uppercase;letter-spacing:1.2px;transition:.15s;display:inline-block}.bt:active{transform:scale(.97)}
+.br{background:var(--red);color:#fff}.by{background:var(--yel);color:#000}.bgl{background:transparent;color:var(--yel);border:2px solid var(--yel)}.bw{width:100%}.bsm{padding:6px 10px;font-size:10px}
+.bt:disabled{background:#333!important;color:#555!important;cursor:not-allowed}
+.cd{background:var(--c1);border:1px solid var(--bd);border-radius:10px;padding:12px;margin-bottom:8px;transition:border-color .2s}.cd:hover{border-color:#444}
+.crd{background:linear-gradient(135deg,var(--red),#8b0000);color:#fff;border:none;border-radius:12px;padding:16px;position:relative;overflow:hidden}
+.cdark{background:linear-gradient(135deg,#151515,#111);border:1px solid var(--bd);border-radius:10px;padding:14px;position:relative;overflow:hidden}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px}
+.rc{background:var(--c1);border:1px solid var(--bd);border-radius:8px;padding:8px;cursor:pointer;transition:.15s;text-align:center}
+.rc:hover{border-color:var(--yel);transform:translateY(-1px)}.rc.sel{background:#1a1000;border:2px solid var(--yel)}.rc.dis{opacity:.18;pointer-events:none}
+.tg{font-size:8px;font-weight:800;color:#000;padding:2px 6px;border-radius:3px;font-family:var(--ff);letter-spacing:.8px;white-space:nowrap;display:inline-block;background:var(--yel)}
+.tgr{background:var(--red);color:#fff}.tgg{background:var(--grn);color:#fff}.tgb{background:var(--blu);color:#fff}
+.live-dot{width:8px;height:8px;border-radius:50%;display:inline-block;animation:liveDot 1s infinite;margin-right:4px}
+.sess{display:flex;gap:3px;margin-top:8px;flex-wrap:wrap}
+.sess-item{flex:1;min-width:55px;text-align:center;padding:5px 2px;border-radius:6px;font-size:7px;font-weight:700;font-family:var(--ff);text-transform:uppercase;letter-spacing:.3px;border:1px solid var(--bd);transition:.2s;cursor:pointer}
+.sess-item:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.sess-item.done{background:var(--grn);color:#000;border-color:var(--grn)}
+.sess-item.live{background:var(--red);color:#fff;border-color:var(--red);animation:pulse 1.5s infinite}
+.sess-item.next{border-color:var(--yel);color:var(--yel)}
+.sess-item .st{display:block;font-size:6px;margin-top:1px;opacity:.7}
+.countdown{display:flex;gap:6px;justify-content:center;margin:8px 0}
+.cd-unit{text-align:center;background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.2);border-radius:8px;padding:6px 10px;min-width:50px}
+.cd-val{font-family:var(--ff);font-size:20px;font-weight:900;color:var(--yel);line-height:1}
+.cd-lbl{font-size:7px;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.mg{background:linear-gradient(135deg,var(--c2),var(--c1));border:1px solid var(--bd);border-radius:10px;padding:14px;margin-bottom:8px;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.mg:hover{border-color:var(--yel);transform:translateY(-1px)}
+footer{text-align:center;padding:16px;font-size:7px;color:#222;position:relative;z-index:1;border-top:1px solid #1a1a1a}
+
+input,select,textarea{cursor:text!important;-webkit-user-select:text!important;user-select:text!important;caret-color:var(--yel)!important}button,.nv,a,[onclick]{cursor:pointer!important}div,span,p,h1,h2,h3,label{cursor:default!important}
+@media(min-width:768px){
+  body{font-size:18px}
+  .ctn{max-width:900px;padding:12px 24px 100px}
+  .cd{padding:18px 22px;margin-bottom:12px;border-radius:14px}
+  .bt{padding:16px 24px;font-size:15px;border-radius:12px}
+  .hdr{padding:14px 20px}
+  .nav{padding:12px 0 env(safe-area-inset-bottom,8px)}
+  .nv{font-size:26px;padding:4px 12px}
+  .nv span{font-size:11px}
+  .sess-item{font-size:13px;padding:6px 10px}
+  .tg{font-size:10px;padding:3px 8px}
+  .dd{width:280px}
+  .dd button{font-size:14px;padding:12px 18px}
+  input,select{font-size:16px!important;padding:13px!important}
+}
+@media(min-width:1200px){
+  body{font-size:20px}
+  .ctn{max-width:1100px;padding:16px 32px 110px}
+  .cd{padding:22px 28px;margin-bottom:14px}
+  .bt{padding:18px 28px;font-size:16px}
+  .hdr{padding:16px 28px}
+  .nv{font-size:30px;padding:5px 16px}
+  .nv span{font-size:12px}
+  .dd{width:320px}
+  .dd button{font-size:15px;padding:14px 20px}
+}
+</style>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+</head>
+<body>
+<div id="bgD"><div class="bgs"></div><div class="bgs"></div><div class="bgg"></div><div class="bg-lines"></div><div class="bg-checker"></div><div id="particles"></div></div>
+<header id="hd"><div class="hs"></div><div class="hi">
+<a style="cursor:pointer;text-decoration:none;display:flex;align-items:baseline;gap:5px" onclick="nav('home')">
+<span style="display:inline-flex;align-items:center;gap:6px">
+<svg viewBox="0 0 32 32" width="24" height="24"><circle cx="16" cy="16" r="15" fill="none" stroke="var(--red)" stroke-width="2"/><circle cx="16" cy="16" r="11" fill="none" stroke="var(--yel)" stroke-width="1.5" stroke-dasharray="4 3"/><text x="16" y="20" text-anchor="middle" fill="var(--yel)" font-family="sans-serif" font-weight="900" font-size="12">GP</text></svg>
+<span style="font-family:var(--ff);font-size:18px;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:1px">GP</span><span style="font-family:var(--ff);font-size:18px;font-weight:900;color:var(--yel);text-transform:uppercase;letter-spacing:1px">Entre Potes</span>
+<span style="font-size:7px;color:var(--t3);letter-spacing:2px;font-weight:700">2026</span></span></a>
+<button class="ham" id="hb" onclick="tM()"><span></span><span></span><span></span></button>
+</div>
+<div class="dd" id="dm">
+<button onclick="nav('home')">🏠 Accueil</button><button onclick="nav('riders')">🏍️ Pilotes</button><button onclick="nav('calendar')">📅 Calendrier</button><button onclick="nav('live')">🎙️ Live Radio</button><button onclick="nav('news')">📰 Actualités</button><button onclick="nav('standings')">🏆 Classement</button><button onclick="nav('games')">🎮 Mini-Jeux</button><button onclick="nav('chat')">💬 Chat</button><button onclick="nav('quests')">🎯 Quêtes</button><button onclick="nav('rules')">📖 Règles</button><button onclick="openBugReport()" style="color:var(--red)">🐛 Signaler un bug</button><button onclick="nav('profile')">👤 Profil</button>
+<div class="sep"></div><button style="color:var(--red)" onclick="S.u=null;sv();nav('splash')">🚪 Déco</button>
+</div></header>
+<button class="mu" id="mb" onclick="tAu()" title="Musique">🔊</button>
+<main>
+<div class="pg on" id="p-splash" tabindex="-1"></div><div class="pg" id="p-home" tabindex="-1"></div><div class="pg" id="p-riders" tabindex="-1"></div><div class="pg" id="p-calendar" tabindex="-1"></div><div class="pg" id="p-weekend" tabindex="-1"></div><div class="pg" id="p-news" tabindex="-1"></div><div class="pg" id="p-standings" tabindex="-1"></div><div class="pg" id="p-games" tabindex="-1"></div><div class="pg" id="p-chat" tabindex="-1"></div><div class="pg" id="p-quests" tabindex="-1"></div><div class="pg" id="p-rules" tabindex="-1"></div><div class="pg" id="p-profile" tabindex="-1"></div><div class="pg" id="p-session" tabindex="-1"></div><div class="pg" id="p-live" tabindex="-1"></div>
+</main>
+<footer><span style="font-family:var(--ff);font-weight:900;font-size:12px;letter-spacing:3px;color:#333">GP <span style="color:#441111">ENTRE POTES</span></span> — v12</footer>
+<script>
+
+
+/* ═══ RIDERS with helmet/suit colors for SVG portraits ═══ */
+const R=[
+{id:1,n:"Marc Márquez",t:"Ducati Lenovo",nm:93,r:97,c:"ES",cl:"#c8102e",b:"Ducati",hc1:"#c8102e",hc2:"#fff",sc:"#c8102e"},
+{id:2,n:"Francesco Bagnaia",t:"Ducati Lenovo",nm:63,r:95,c:"IT",cl:"#c8102e",b:"Ducati",hc1:"#1a1a8a",hc2:"#ffd700",sc:"#c8102e"},
+{id:3,n:"Pedro Acosta",t:"Red Bull KTM",nm:37,r:93,c:"ES",cl:"#1e3a6d",b:"KTM",hc1:"#ff6600",hc2:"#1e3a6d",sc:"#1e3a6d"},
+{id:4,n:"Marco Bezzecchi",t:"Aprilia Racing",nm:72,r:92,c:"IT",cl:"#7a7a7a",b:"Aprilia",hc1:"#222",hc2:"#ff0066",sc:"#333"},
+{id:4,n:"Jorge Martín",t:"Aprilia Racing",nm:89,r:94,c:"ES",cl:"#7a7a7a",b:"Aprilia",hc1:"#333",hc2:"#00ccff",sc:"#555"},
+{id:4,n:"Álex Márquez",t:"Gresini Racing",nm:73,r:90,c:"ES",cl:"#1b8a4e",b:"Ducati",hc1:"#1b8a4e",hc2:"#e44",sc:"#1b8a4e"},
+{id:4,n:"Raúl Fernández",t:"Trackhouse",nm:25,r:88,c:"ES",cl:"#d4610a",b:"Aprilia",hc1:"#d4610a",hc2:"#fff",sc:"#d4610a"},
+{id:4,n:"Fabio Quartararo",t:"Yamaha",nm:20,r:86,c:"FR",cl:"#003da5",b:"Yamaha",hc1:"#003da5",hc2:"#00ff88",sc:"#003da5"},
+{id:4,n:"Enea Bastianini",t:"KTM Tech3",nm:23,r:87,c:"IT",cl:"#1e3a6d",b:"KTM",hc1:"#1e3a6d",hc2:"#ff6600",sc:"#1e3a6d"},
+{id:4,n:"Brad Binder",t:"Red Bull KTM",nm:33,r:87,c:"ZA",cl:"#1e3a6d",b:"KTM",hc1:"#ff6600",hc2:"#1e3a6d",sc:"#1e3a6d"},
+{id:4,n:"Franco Morbidelli",t:"VR46",nm:21,r:84,c:"IT",cl:"#c8b400",b:"Ducati",hc1:"#c8b400",hc2:"#222",sc:"#c8b400"},
+{id:4,n:"Fabio Di Giannantonio",t:"VR46",nm:49,r:86,c:"IT",cl:"#c8b400",b:"Ducati",hc1:"#c8b400",hc2:"#e60",sc:"#c8b400"},
+{id:4,n:"Maverick Viñales",t:"KTM Tech3",nm:12,r:85,c:"ES",cl:"#1e3a6d",b:"KTM",hc1:"#ffcc00",hc2:"#1e3a6d",sc:"#1e3a6d"},
+{id:4,n:"Ai Ogura",t:"Trackhouse",nm:79,r:84,c:"JP",cl:"#d4610a",b:"Aprilia",hc1:"#d4610a",hc2:"#fff",sc:"#d4610a"},
+{id:4,n:"Johann Zarco",t:"Honda LCR",nm:5,r:83,c:"FR",cl:"#b50018",b:"Honda",hc1:"#1b8a4e",hc2:"#b50018",sc:"#b50018"},
+{id:4,n:"Fermín Aldeguer",t:"Gresini",nm:54,r:85,c:"ES",cl:"#1b8a4e",b:"Ducati",hc1:"#1b8a4e",hc2:"#fff",sc:"#1b8a4e"},
+{id:4,n:"Joan Mir",t:"Honda HRC",nm:36,r:83,c:"ES",cl:"#e07000",b:"Honda",hc1:"#e07000",hc2:"#fff",sc:"#e07000"},
+{id:4,n:"Luca Marini",t:"Honda HRC",nm:10,r:80,c:"IT",cl:"#e07000",b:"Honda",hc1:"#e07000",hc2:"#222",sc:"#e07000"},
+{id:4,n:"Jack Miller",t:"Pramac Yamaha",nm:43,r:82,c:"AU",cl:"#003da5",b:"Yamaha",hc1:"#003da5",hc2:"#e8e8e8",sc:"#003da5"},
+{id:4,n:"Álex Rins",t:"Yamaha",nm:42,r:83,c:"ES",cl:"#003da5",b:"Yamaha",hc1:"#003da5",hc2:"#00cc66",sc:"#003da5"},
+{id:4,n:"Toprak Razgatlıoğlu",t:"Pramac Yamaha",nm:7,r:82,c:"TR",cl:"#003da5",b:"Yamaha",hc1:"#e10600",hc2:"#003da5",sc:"#003da5"},
+{id:4,n:"Diogo Moreira",t:"Honda LCR",nm:11,r:78,c:"BR",cl:"#b50018",b:"Honda",hc1:"#b50018",hc2:"#ffcc00",sc:"#b50018"}
+];
+
+/* SVG Rider Portrait Generator - original artwork, no copyright issues */
+function riderSVG(r,sz){
+  const s=sz||50;
+  return `<svg viewBox="0 0 60 72" width="${s}" height="${s*1.2}" style="display:block;margin:0 auto">
+<defs><linearGradient id="h${r.id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="${r.hc1}"/><stop offset="100%" stop-color="${r.hc2}"/></linearGradient></defs>
+<ellipse cx="30" cy="24" rx="18" ry="20" fill="url(#h${r.id})" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+<rect x="14" y="22" width="32" height="6" rx="3" fill="rgba(0,0,0,.55)"/>
+<rect x="16" y="23" width="28" height="4" rx="2" fill="rgba(100,200,255,.15)"/>
+<text x="30" y="18" text-anchor="middle" fill="#fff" font-family="'Roboto Condensed',sans-serif" font-weight="900" font-size="13" opacity=".9">${r.nm}</text>
+<path d="M15 44 Q15 36 22 36 L38 36 Q45 36 45 44 L48 64 Q48 70 42 70 L18 70 Q12 70 12 64 Z" fill="${r.sc}" opacity=".85"/>
+<rect x="20" y="40" width="20" height="3" rx="1" fill="rgba(255,255,255,.1)"/>
+<line x1="30" y1="36" x2="30" y2="65" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+</svg>`;
+}
+
+function pAv(r,c){
+  const sz=c==='pav'?42:c==='pavS'?30:22;
+  return `<div style="width:${sz}px;margin:0 auto 3px">${riderSVG(r,sz)}</div>`;
+}
+function pAvInline(r,sz){return `<div style="width:${sz||22}px;display:inline-block;vertical-align:middle">${riderSVG(r,sz||22)}</div>`;}
+
+/* ═══ BRAZIL GP — CORRECT CET TIMES (UTC+1, France heure d'hiver) ═══ */
+/* Local Goiânia = UTC-3 → CET = local + 4h */
+const BRAZIL_SESSIONS=[
+  {name:"FP1",full:"Free Practice 1",cet:"Ven 16:05",start:"2026-03-20T16:05:00+01:00",end:"2026-03-20T17:05:00+01:00",dur:60,weather:"wet",
+   notes:"Session retardée 1h (pluie). Acosta leader sur pneus pluie. Miller P2 sur slicks en fin de session. Aucune chute.",
+   res:[{rid:3,t:"1:26.688"},{rid:19,t:"1:26.775"},{rid:4,t:"1:26.918"},{rid:1,t:"1:26.975"},{rid:11,t:"1:27.170"},{rid:13,t:"1:27.258"},{rid:5,t:"1:27.312"},{rid:16,t:"1:27.576"},{rid:2,t:"1:27.622"},{rid:6,t:"1:27.701"},{rid:21,t:"1:27.812"},{rid:10,t:"1:27.890"},{rid:14,t:"1:27.945"},{rid:8,t:"1:28.012"},{rid:17,t:"1:28.134"},{rid:15,t:"1:28.256"},{rid:9,t:"1:28.345"},{rid:12,t:"1:28.467"},{rid:18,t:"1:28.589"},{rid:20,t:"1:28.712"},{rid:22,t:"1:28.878"},{rid:7,t:"1:29.001"}]},
+  {name:"Practice",full:"Practice (Top 10 → Q2)",cet:"Ven 20:00",start:"2026-03-20T20:00:00+01:00",end:"2026-03-20T21:00:00+01:00",dur:60,weather:"mixed",
+   notes:"Zarco P1 surprise ! Toprak P3, 1ère Q2 ! Bezzecchi P20 piégé par la pluie → Q1. Crashes: Binder, Miller, Moreira (T4). Morbidelli en panne d'essence.",
+   res:[{rid:15,t:"1:21.257"},{rid:1,t:"1:21.382"},{rid:21,t:"1:21.565"},{rid:5,t:"1:21.610"},{rid:3,t:"1:21.688"},{rid:6,t:"1:21.745"},{rid:8,t:"1:21.812"},{rid:16,t:"1:21.890"},{rid:2,t:"1:21.944"},{rid:14,t:"1:22.001"},{rid:18,t:"1:22.022"},{rid:19,t:"1:22.134"},{rid:20,t:"1:22.267"},{rid:13,t:"1:22.345"},{rid:22,t:"1:22.478"},{rid:17,t:"1:22.589"},{rid:10,t:"1:22.712"},{rid:11,t:"1:22.890"},{rid:12,t:"1:23.011"},{rid:4,t:"1:23.456"},{rid:7,t:"1:23.678"},{rid:9,t:"1:26.000"}],
+   q2:[15,1,21,5,3,6,8,16,2,14],q1:[18,19,20,13,22,17,10,11,12,4,7,9]},
+  {name:"FP2",full:"Free Practice 2",cet:"Sam 14:10",start:"2026-03-21T14:10:00+01:00",end:"2026-03-21T14:45:00+01:00",dur:30,weather:"dry",notes:"30 min de warm-up. Piste sèche ce matin ! Bezzecchi remonte — gros rythme. Márquez et Martín rapides aussi.",res:[{rid:1,t:"1:18.234"},{rid:5,t:"1:18.301"},{rid:4,t:"1:18.356"},{rid:3,t:"1:18.412"},{rid:2,t:"1:18.478"},{rid:15,t:"1:18.534"},{rid:21,t:"1:18.601"},{rid:7,t:"1:18.667"},{rid:8,t:"1:18.723"},{rid:6,t:"1:18.789"},{rid:12,t:"1:18.834"},{rid:14,t:"1:18.901"},{rid:16,t:"1:18.956"},{rid:10,t:"1:19.012"},{rid:11,t:"1:19.078"},{rid:13,t:"1:19.134"},{rid:19,t:"1:19.201"},{rid:17,t:"1:19.267"},{rid:18,t:"1:19.334"},{rid:9,t:"1:19.401"},{rid:22,t:"1:19.467"},{rid:20,t:"1:19.534"}]},
+  {name:"Q1",full:"Qualifications 1",cet:"Sam 14:50",start:"2026-03-21T14:50:00+01:00",end:"2026-03-21T15:10:00+01:00",dur:15,weather:"dry",notes:"Bezzecchi et Di Giannantonio passent en Q2 ! Les 2 VR46 se qualifient. Mir P3 à 179ms du cut.",res:[{rid:4,t:"1:17.890"},{rid:12,t:"1:17.945"},{rid:17,t:"1:18.124"},{rid:22,t:"1:18.234"},{rid:11,t:"1:18.345"},{rid:7,t:"1:18.456"},{rid:20,t:"1:18.534"},{rid:19,t:"1:18.612"},{rid:18,t:"1:18.723"},{rid:13,t:"1:18.834"},{rid:10,t:"1:18.945"},{rid:9,t:"1:19.123"}]},
+  {name:"Q2",full:"Qualifications 2 — POLE DiGiannantonio !",cet:"Sam 15:15",start:"2026-03-21T15:15:00+01:00",end:"2026-03-21T15:35:00+01:00",dur:15,weather:"dry",notes:"POLE Di Giannantonio 1:17.410 ! Bezzecchi P2 depuis Q1. MM93 P3. Crashes: Márquez, Acosta, Bagnaia, Martín tous au sol en Q2 !",res:[{rid:12,t:"1:17.410"},{rid:4,t:"1:17.480"},{rid:1,t:"1:17.491"},{rid:8,t:"1:17.561"},{rid:5,t:"1:17.630"},{rid:14,t:"1:17.702"},{rid:16,t:"1:17.715"},{rid:6,t:"1:17.799"},{rid:3,t:"1:18.034"},{rid:15,t:"1:18.065"},{rid:2,t:"1:18.122"},{rid:21,t:"1:18.422"}]},  {name:"Sprint",full:"Course Sprint (15 tours) — Márquez GAGNE !",cet:"Sam 20:20",start:"2026-03-21T20:20:00+01:00",end:"2026-03-21T20:50:00+01:00",dur:25,weather:"dry",notes:"Sprint retardé de 1h20 → trou dans la piste sur la ligne droite principale ! Réparations nécessaires. Márquez remonte de P3 à la victoire, 1ère victoire 2026. DiGia P2 après avoir mené. Martín P3, 1er podium Aprilia. Moreira P10 à domicile, dans les points !",res:[{rid:1,t:"P1"},{rid:12,t:"P2"},{rid:5,t:"P3"},{rid:4,t:"P4"},{rid:14,t:"P5"},{rid:8,t:"P6"},{rid:6,t:"P7"},{rid:2,t:"P8"},{rid:3,t:"P9"},{rid:22,t:"P10"},{rid:16,t:"P11"},{rid:15,t:"P12"},{rid:17,t:"P13"},{rid:7,t:"P14"},{rid:21,t:"P15"},{rid:11,t:"P16"},{rid:18,t:"P17"},{rid:19,t:"P18"},{rid:20,t:"P19"},{rid:10,t:"P20"},{rid:13,t:"P21"},{rid:9,t:"P22"}]},
+  {name:"WU",full:"Warm Up",cet:"Dim 14:40",start:"2026-03-22T14:40:00+01:00",end:"2026-03-22T14:50:00+01:00",dur:10,weather:null,notes:"10 min warm-up.",res:null},
+  {name:"Race",full:"Course (31 tours)",cet:"Dim 19:00",start:"2026-03-22T19:00:00+01:00",end:"2026-03-22T20:00:00+01:00",dur:45,weather:null,notes:"31 tours — record depuis 2013 (Laguna Seca).",res:null}
+];
+
+const G=[
+{id:1,n:"GP de Thaïlande",ci:"Buriram",dt:"2026-03-01",cc:"TH",st:"done",sprint:"Sam 09:00",race:"Dim 09:00",sess:["FP1","Prac","Q1/Q2","Sprint","Race"],sessSt:[2,2,2,2,2],sessTimes:["","","","",""]},
+{id:2,n:"GP du Brésil",ci:"Goiânia",dt:"2026-03-22",cc:"BR",st:"live",sprint:"Sam 19:00",race:"Dim 19:00",sessData:BRAZIL_SESSIONS},
+{id:3,n:"GP des Amériques",ci:"Austin",dt:"2026-03-29",cc:"US",st:"next",sprint:"Sam 22:00",race:"Dim 21:00"},
+{id:4,n:"GP d'Espagne",ci:"Jerez",dt:"2026-04-26",cc:"ES",st:"soon",sprint:"Sam 15:00",race:"Dim 14:00"},
+{id:5,n:"GP de France",ci:"Le Mans",dt:"2026-05-10",cc:"FR",st:"soon",sprint:"Sam 15:00",race:"Dim 14:00"},
+{id:6,n:"GP de Catalogne",ci:"Barcelona",dt:"2026-05-17",cc:"ES",st:"soon",sprint:"Sam 15:00",race:"Dim 14:00"},
+{id:7,n:"GP d'Italie",ci:"Mugello",dt:"2026-05-31",cc:"IT",st:"soon",sprint:"Sam 15:00",race:"Dim 14:00"},
+{id:8,n:"GP de Hongrie",ci:"Balaton Park",dt:"2026-06-07",cc:"HU",st:"soon",sprint:"Sam 15:00",race:"Dim 14:00"},
+{id:9,n:"GP de Tchéquie",ci:"Brno",dt:"2026-06-21",cc:"CZ",st:"soon",sprint:"Sam 15:00",race:"Dim 14:00"},
+{id:10,n:"GP des Pays-Bas",ci:"Assen",dt:"2026-06-28",cc:"NL",st:"soon",sprint:"Sam 15:00",race:"Dim 14:00"},
+{id:11,n:"GP d'Allemagne",ci:"Sachsenring",dt:"2026-07-12",cc:"DE",st:"soon",sprint:"Sam 15:00",race:"Dim 14:00"},
+{id:12,n:"GP de Grande-Bretagne",ci:"Silverstone",dt:"2026-08-09",cc:"GB",st:"soon",sprint:"Sam 16:00",race:"Dim 15:00"},
+{id:13,n:"GP d'Aragon",ci:"Aragón",dt:"2026-08-30",cc:"ES",st:"soon",sprint:"Sam 15:00",race:"Dim 14:00"},
+{id:14,n:"GP de Saint-Marin",ci:"Misano",dt:"2026-09-13",cc:"SM",st:"soon",sprint:"Sam 15:00",race:"Dim 14:00"},
+{id:15,n:"GP d'Autriche",ci:"Red Bull Ring",dt:"2026-09-20",cc:"AT",st:"soon",sprint:"Sam 15:00",race:"Dim 14:00"},
+{id:16,n:"GP du Japon",ci:"Motegi",dt:"2026-10-04",cc:"JP",st:"soon",sprint:"Sam 08:00",race:"Dim 07:00"},
+{id:17,n:"GP d'Indonésie",ci:"Mandalika",dt:"2026-10-11",cc:"ID",st:"soon",sprint:"Sam 09:00",race:"Dim 08:00"},
+{id:18,n:"GP d'Australie",ci:"Phillip Island",dt:"2026-10-25",cc:"AU",st:"soon",sprint:"Sam 06:00",race:"Dim 05:00"},
+{id:19,n:"GP de Malaisie",ci:"Sepang",dt:"2026-11-01",cc:"MY",st:"soon",sprint:"Sam 09:00",race:"Dim 08:00"},
+{id:20,n:"GP du Qatar",ci:"Losail",dt:"2026-11-08",cc:"QA",st:"soon",sprint:"Sam 19:00",race:"Dim 19:00",note:"Reporté depuis avril (guerre Iran)"},
+{id:21,n:"GP du Portugal",ci:"Portimão",dt:"2026-11-15",cc:"PT",st:"soon",sprint:"Sam 15:00",race:"Dim 14:00"},
+{id:22,n:"GP de Valence",ci:"Valencia",dt:"2026-11-22",cc:"ES",st:"soon",sprint:"Sam 15:00",race:"Dim 14:00"}
+];
+// Session schedules per GP (heure FR)
+var SCHED={
+1:{ven:[{s:"FP1",t:"04:45"},{s:"Practice",t:"09:00"}],sam:[{s:"FP2",t:"04:10"},{s:"Q1",t:"04:50"},{s:"Q2",t:"05:15"},{s:"Sprint",t:"09:00"}],dim:[{s:"Warm Up",t:"04:40"},{s:"Course",t:"09:00"}]},
+2:{ven:[{s:"FP1",t:"16:05"},{s:"Practice",t:"20:00"}],sam:[{s:"FP2",t:"14:10"},{s:"Q1",t:"14:50"},{s:"Q2",t:"15:15"},{s:"Sprint",t:"19:00"}],dim:[{s:"Warm Up",t:"14:40"},{s:"Course",t:"19:00"}]},
+3:{ven:[{s:"FP1",t:"16:45"},{s:"Practice",t:"21:00"}],sam:[{s:"FP2",t:"16:10"},{s:"Q1",t:"16:50"},{s:"Q2",t:"17:15"},{s:"Sprint",t:"22:00"}],dim:[{s:"Warm Up",t:"16:40"},{s:"Course",t:"21:00"}]},
+4:{ven:[{s:"FP1",t:"10:45"},{s:"Practice",t:"15:00"}],sam:[{s:"FP2",t:"10:10"},{s:"Q1",t:"10:50"},{s:"Q2",t:"11:15"},{s:"Sprint",t:"15:00"}],dim:[{s:"Warm Up",t:"09:40"},{s:"Course",t:"14:00"}]},
+5:{ven:[{s:"FP1",t:"10:45"},{s:"Practice",t:"15:00"}],sam:[{s:"FP2",t:"10:10"},{s:"Q1",t:"10:50"},{s:"Q2",t:"11:15"},{s:"Sprint",t:"15:00"}],dim:[{s:"Warm Up",t:"09:40"},{s:"Course",t:"14:00"}]},
+6:{ven:[{s:"FP1",t:"10:45"},{s:"Practice",t:"15:00"}],sam:[{s:"FP2",t:"10:10"},{s:"Q1",t:"10:50"},{s:"Q2",t:"11:15"},{s:"Sprint",t:"15:00"}],dim:[{s:"Warm Up",t:"09:40"},{s:"Course",t:"14:00"}]},
+7:{ven:[{s:"FP1",t:"10:45"},{s:"Practice",t:"15:00"}],sam:[{s:"FP2",t:"10:10"},{s:"Q1",t:"10:50"},{s:"Q2",t:"11:15"},{s:"Sprint",t:"15:00"}],dim:[{s:"Warm Up",t:"09:40"},{s:"Course",t:"14:00"}]},
+8:{ven:[{s:"FP1",t:"10:45"},{s:"Practice",t:"15:00"}],sam:[{s:"FP2",t:"10:10"},{s:"Q1",t:"10:50"},{s:"Q2",t:"11:15"},{s:"Sprint",t:"15:00"}],dim:[{s:"Warm Up",t:"09:40"},{s:"Course",t:"14:00"}]},
+9:{ven:[{s:"FP1",t:"10:45"},{s:"Practice",t:"15:00"}],sam:[{s:"FP2",t:"10:10"},{s:"Q1",t:"10:50"},{s:"Q2",t:"11:15"},{s:"Sprint",t:"15:00"}],dim:[{s:"Warm Up",t:"09:40"},{s:"Course",t:"14:00"}]},
+10:{ven:[{s:"FP1",t:"10:45"},{s:"Practice",t:"15:00"}],sam:[{s:"FP2",t:"10:10"},{s:"Q1",t:"10:50"},{s:"Q2",t:"11:15"},{s:"Sprint",t:"15:00"}],dim:[{s:"Warm Up",t:"09:40"},{s:"Course",t:"14:00"}]},
+11:{ven:[{s:"FP1",t:"10:45"},{s:"Practice",t:"15:00"}],sam:[{s:"FP2",t:"10:10"},{s:"Q1",t:"10:50"},{s:"Q2",t:"11:15"},{s:"Sprint",t:"15:00"}],dim:[{s:"Warm Up",t:"09:40"},{s:"Course",t:"14:00"}]},
+12:{ven:[{s:"FP1",t:"11:45"},{s:"Practice",t:"16:00"}],sam:[{s:"FP2",t:"11:10"},{s:"Q1",t:"11:50"},{s:"Q2",t:"12:15"},{s:"Sprint",t:"16:00"}],dim:[{s:"Warm Up",t:"10:40"},{s:"Course",t:"15:00"}]},
+13:{ven:[{s:"FP1",t:"10:45"},{s:"Practice",t:"15:00"}],sam:[{s:"FP2",t:"10:10"},{s:"Q1",t:"10:50"},{s:"Q2",t:"11:15"},{s:"Sprint",t:"15:00"}],dim:[{s:"Warm Up",t:"09:40"},{s:"Course",t:"14:00"}]},
+14:{ven:[{s:"FP1",t:"10:45"},{s:"Practice",t:"15:00"}],sam:[{s:"FP2",t:"10:10"},{s:"Q1",t:"10:50"},{s:"Q2",t:"11:15"},{s:"Sprint",t:"15:00"}],dim:[{s:"Warm Up",t:"09:40"},{s:"Course",t:"14:00"}]},
+15:{ven:[{s:"FP1",t:"10:45"},{s:"Practice",t:"15:00"}],sam:[{s:"FP2",t:"10:10"},{s:"Q1",t:"10:50"},{s:"Q2",t:"11:15"},{s:"Sprint",t:"15:00"}],dim:[{s:"Warm Up",t:"09:40"},{s:"Course",t:"14:00"}]},
+16:{ven:[{s:"FP1",t:"03:45"},{s:"Practice",t:"08:00"}],sam:[{s:"FP2",t:"03:10"},{s:"Q1",t:"03:50"},{s:"Q2",t:"04:15"},{s:"Sprint",t:"08:00"}],dim:[{s:"Warm Up",t:"03:40"},{s:"Course",t:"07:00"}]},
+17:{ven:[{s:"FP1",t:"04:45"},{s:"Practice",t:"09:00"}],sam:[{s:"FP2",t:"04:10"},{s:"Q1",t:"04:50"},{s:"Q2",t:"05:15"},{s:"Sprint",t:"09:00"}],dim:[{s:"Warm Up",t:"04:40"},{s:"Course",t:"08:00"}]},
+18:{ven:[{s:"FP1",t:"01:45"},{s:"Practice",t:"06:00"}],sam:[{s:"FP2",t:"01:10"},{s:"Q1",t:"01:50"},{s:"Q2",t:"02:15"},{s:"Sprint",t:"06:00"}],dim:[{s:"Warm Up",t:"01:40"},{s:"Course",t:"05:00"}]},
+19:{ven:[{s:"FP1",t:"03:45"},{s:"Practice",t:"08:00"}],sam:[{s:"FP2",t:"03:10"},{s:"Q1",t:"03:50"},{s:"Q2",t:"04:15"},{s:"Sprint",t:"08:00"}],dim:[{s:"Warm Up",t:"03:40"},{s:"Course",t:"08:00"}]},
+20:{ven:[{s:"FP1",t:"14:45"},{s:"Practice",t:"19:00"}],sam:[{s:"FP2",t:"14:10"},{s:"Q1",t:"14:50"},{s:"Q2",t:"15:15"},{s:"Sprint",t:"19:00"}],dim:[{s:"Warm Up",t:"14:40"},{s:"Course",t:"19:00"}]},
+21:{ven:[{s:"FP1",t:"10:45"},{s:"Practice",t:"15:00"}],sam:[{s:"FP2",t:"10:10"},{s:"Q1",t:"10:50"},{s:"Q2",t:"11:15"},{s:"Sprint",t:"15:00"}],dim:[{s:"Warm Up",t:"09:40"},{s:"Course",t:"14:00"}]},
+22:{ven:[{s:"FP1",t:"10:45"},{s:"Practice",t:"15:00"}],sam:[{s:"FP2",t:"10:10"},{s:"Q1",t:"10:50"},{s:"Q2",t:"11:15"},{s:"Sprint",t:"15:00"}],dim:[{s:"Warm Up",t:"09:40"},{s:"Course",t:"14:00"}]}
+};
+
+
+function getSessSt(g){
+  if(!g.sessData)return[];
+  const now=new Date();
+  return g.sessData.map(s=>{
+    const st=new Date(s.start),en=new Date(s.end);
+    if(now>=en)return 2;if(now>=st)return 1;return 0;
+  });
+}
+
+const RES={1:{race:[{rid:4,p:1},{rid:3,p:2},{rid:7,p:3},{rid:5,p:4},{rid:14,p:5},{rid:12,p:6},{rid:10,p:7},{rid:11,p:8},{rid:2,p:9},{rid:18,p:10},{rid:15,p:11},{rid:9,p:12},{rid:22,p:13},{rid:8,p:14},{rid:20,p:15},{rid:13,p:16},{rid:21,p:17},{rid:19,p:18},{rid:1,p:-1},{rid:6,p:-1},{rid:17,p:-1}],pole:4,weather:"dry",winner:4}};
+
+const NW=[
+{t:"🏆 MÁRQUEZ GAGNE LE SPRINT ! Chaos au Brésil",sub:"Trou dans la piste, course décalée de 1h20, le champion en titre répond !",s:"Journée de folie à Goiânia ! Un trou est apparu sur la ligne droite principale après les qualifs, forçant 1h20 de retard. Márquez, parti P3, dépasse DiGiannantonio dans les derniers tours pour sa 1ère victoire 2026. DiGia P2, Martín P3 (1er podium Aprilia). Bezzecchi P4, Ogura P5, Quartararo P6. Moreira P10 devant son public. Acosta P9, perd des points au championnat. Sprint points: 12-9-7-6-5-4-3-2-1.",stats:"MM93 P1 Sprint • DiGia P2 • Martín P3 • Trou piste = 1h20 retard • Moreira P10 à domicile",dt:"Sam 21 mars 20:50",tg:"🏆 SPRINT",tc:"y"},
+{t:"Trou dans la piste ! Le GP du Brésil vire au chaos",sub:"Un sinkhole sur la ligne droite principale force 1h20 de retard",s:"Scène surréaliste à Goiânia : après les qualifs, un trou s'est formé dans l'asphalte de la ligne droite principale. Les organisateurs ont dû réparer en urgence. Le Sprint prévu à 19h CET n'a démarré qu'à 20h20. Les qualifs Moto2 sont reportées à dimanche matin. Un week-end brésilien vraiment fou entre les inondations de vendredi et le sinkhole de samedi.",stats:"Sinkhole ligne droite • Sprint décalé 1h20 • Moto2 qualifs reportées dimanche",dt:"Sam 21 mars 17:00",tg:"🚨 CHAOS",tc:"r"},
+{t:"POLE DiGiannantonio ! 4 crashes en Q2",sub:"Le pilote VR46 crée la surprise depuis Q1 — record du circuit 1:17.410",s:"Di Giannantonio décroche sa 2e pole MotoGP en 1:17.410, nouveau record ! Passé par Q1 comme Bezzecchi (P2). Crashes spectaculaires en Q2: Márquez, Acosta, Bagnaia et Martín tous au sol ! Quartararo P4, meilleure qualif Yamaha depuis longtemps.",stats:"DiGia POLE 1:17.410 • Bez P2 • MM93 P3 • 4 crashes Q2",dt:"Sam 21 mars 15:35",tg:"🏁 QUALIFS",tc:"g"},
+{t:"Aldeguer P7 qualif, P11 Sprint — retour incroyable",sub:"Le rookie Gresini impressionne malgré sa fracture du fémur",s:"Revenu de fracture du fémur gauche (janvier), Aldeguer enchaîne: P8 Practice, P7 qualif, P11 Sprint. Toujours sur béquilles mais rapide. Transfert VR46 2027 confirmé par la presse espagnole.",stats:"P7 qualif • P11 Sprint • Retour fracture • VR46 2027",dt:"Sam 21 mars 20:50",tg:"COMEBACK",tc:"b"},
+{t:"Acosta P9 Sprint — le leader perd du terrain",sub:"Le pilote KTM marque seulement 2 points, Márquez revient fort",s:"Mauvaise opération pour Acosta: P9 au Sprint (2 pts). Márquez gagne (12 pts) et revient dans la course au titre. Classement provisoire après Sprint: Acosta 34, Márquez 21, Bezzecchi 31. La course de dimanche sera décisive.",stats:"Acosta P9 = 2pts • MM93 +12pts • Bezzecchi P4 = 6pts",dt:"Sam 21 mars 20:50",tg:"CHAMPIONNAT",tc:"y"},
+{t:"Bezzecchi domine la Thaïlande (+5.5s)",sub:"4 Aprilia dans le top 5: du jamais vu en MotoGP",s:"Pole + record du tour + victoire. 3e victoire GP consécutive. Ducati 0 podium pour la 1ère fois depuis 88 courses.",stats:"P1 +5.5s • 4 Aprilia top 5 • 0 podium Ducati",dt:"1 mars",tg:"RÉSULTAT R1",tc:"g"}
+];
+
+const PM={1:25,2:20,3:16,4:13,5:11,6:10,7:9,8:8,9:7,10:6};
+const FL={IT:"🇮🇹",ES:"🇪🇸",FR:"🇫🇷",AU:"🇦🇺",ZA:"🇿🇦",JP:"🇯🇵",PT:"🇵🇹",TH:"🇹🇭",BR:"🇧🇷",US:"🇺🇸",QA:"🇶🇦",GB:"🇬🇧",NL:"🇳🇱",DE:"🇩🇪",CZ:"🇨🇿",AT:"🇦🇹",SM:"🇸🇲",ID:"🇮🇩",MY:"🇲🇾",HU:"🇭🇺",TR:"🇹🇷"};
+const ti=r=>r>=95?"ELITE":r>=90?"TOP":r>=85?"BON":r>=80?"MOY":"OUT";
+const tC=r=>r>=95?"var(--yel)":r>=90?"#ccc":r>=85?"#cd853f":r>=80?"#777":"#555";
+const rb2=r=>r>=95?3:r>=90?2:r>=85?1:0;
+const LV=[{l:1,n:"Débutant",m:0,i:"🏁"},{l:2,n:"Amateur",m:100,i:"🔧"},{l:3,n:"Confirmé",m:250,i:"⚙️"},{l:4,n:"Expert",m:500,i:"🔥"},{l:5,n:"Pro",m:800,i:"⭐"},{l:6,n:"Elite",m:1200,i:"💎"},{l:7,n:"Légende",m:1800,i:"👑"}];
+const gl=x=>{let v=LV[0];for(const l of LV)if(x>=l.m)v=l;return v},gn=x=>LV.find(l=>l.m>x)||LV[LV.length-1],fd=d=>new Date(d).toLocaleDateString("fr-FR",{day:"numeric",month:"short"});
+const QS=[
+{id:"s1",t:"Premier pas",d:"Fais ton 1er choix",xp:50,cat:"🏁 Progression",ck:p=>p.pk.length>=1},
+{id:"s2",t:"Habitué",d:"Joue 3 GP",xp:100,cat:"🏁 Progression",ck:p=>p.pk.length>=3},
+{id:"s3",t:"Régulier",d:"Joue 5 GP",xp:200,cat:"🏁 Progression",ck:p=>p.pk.length>=5},
+{id:"s4",t:"Fidèle",d:"Joue 10 GP",xp:350,cat:"🏁 Progression",ck:p=>p.pk.length>=10},
+{id:"s5",t:"Mi-saison",d:"Joue 11 GP",xp:400,cat:"🏁 Progression",ck:p=>p.pk.length>=11},
+{id:"s6",t:"Marathonien",d:"Joue 20 GP",xp:600,cat:"🏁 Progression",ck:p=>p.pk.length>=20},
+{id:"s7",t:"Saison complète",d:"22/22 GP joués",xp:1000,cat:"🏁 Progression",ck:p=>p.pk.length>=22},
+{id:"p1",t:"Bon œil",d:"20+ pts sur 1 GP",xp:150,cat:"🏆 Points",ck:p=>Object.values(p.sc).some(s=>s>=20)},
+{id:"p2",t:"Centurion",d:"100 pts total",xp:300,cat:"🏆 Points",ck:p=>p.tp>=100},
+{id:"p3",t:"Bicentenaire",d:"200 pts total",xp:500,cat:"🏆 Points",ck:p=>p.tp>=200},
+{id:"p4",t:"Champion",d:"300 pts total",xp:800,cat:"🏆 Points",ck:p=>p.tp>=300},
+{id:"p5",t:"Record du tour",d:"30+ pts sur 1 GP",xp:250,cat:"🏆 Points",ck:p=>Object.values(p.sc).some(s=>s>=30)},
+{id:"p6",t:"Série en cours",d:"Points positifs 3 GP de suite",xp:200,cat:"🏆 Points",ck:p=>{let c=0,mx=0;for(let i=1;i<=22;i++){if(p.sc[i]>0){c++;mx=Math.max(mx,c)}else c=0}return mx>=3}},
+{id:"b1",t:"Parieur",d:"Fais 3 paris",xp:100,cat:"🎲 Paris",ck:p=>p.pk.filter(x=>x.hb).length>=3},
+{id:"b2",t:"Flambeur",d:"Fais 10 paris",xp:250,cat:"🎲 Paris",ck:p=>p.pk.filter(x=>x.hb).length>=10},
+{id:"b3",t:"Parieur fou",d:"Fais 20 paris",xp:400,cat:"🎲 Paris",ck:p=>p.pk.filter(x=>x.hb).length>=20},
+{id:"j1",t:"Joker débutant",d:"Utilise 1 joker",xp:150,cat:"⚡ Stratégie",ck:p=>p.jk<=1},
+{id:"j2",t:"All-in",d:"Utilise tes 2 jokers",xp:300,cat:"⚡ Stratégie",ck:p=>p.jk<=0},
+{id:"d1",t:"Diversifié",d:"5 pilotes différents choisis",xp:200,cat:"⚡ Stratégie",ck:p=>{let u={};p.pk.forEach(x=>{u[x.r]=1});return Object.keys(u).length>=5}},
+{id:"d2",t:"Explorateur",d:"10 pilotes différents",xp:400,cat:"⚡ Stratégie",ck:p=>{let u={};p.pk.forEach(x=>{u[x.r]=1});return Object.keys(u).length>=10}},
+{id:"m1",t:"Joueur",d:"Joue 1 mini-jeu",xp:50,cat:"🎮 Mini-Jeux",ck:p=>Object.keys(S.mg).length>=1},
+{id:"m2",t:"Gamer",d:"Joue 10 mini-jeux",xp:200,cat:"🎮 Mini-Jeux",ck:p=>Object.keys(S.mg).length>=10},
+{id:"m3",t:"Completiste",d:"4 mini-jeux sur 1 GP",xp:250,cat:"🎮 Mini-Jeux",ck:p=>{for(let i=1;i<=22;i++){let c=0;if(S.mg['chrono_'+i])c++;if(S.mg['h2h_'+i])c++;if(S.mg['crash_'+i])c++;if(S.mg['grid_'+i])c++;if(c>=4)return true}return false}},
+{id:"c1",t:"Bavard",d:"Envoie 5 messages",xp:50,cat:"💬 Social",ck:p=>S.ch.filter(m=>m.f===p.nm).length>=5},
+{id:"c2",t:"Commentateur",d:"20 messages",xp:150,cat:"💬 Social",ck:p=>S.ch.filter(m=>m.f===p.nm).length>=20},
+{id:"pr1",t:"Personnalisé",d:"Avatar + pilote favori",xp:75,cat:"👤 Profil",ck:p=>p.av&&p.fav},
+{id:"pr2",t:"Fan complet",d:"Profil 100% rempli",xp:150,cat:"👤 Profil",ck:p=>p.av&&p.fav&&p.favTeam&&p.favCircuit}
+];
+function tgH(tc,tx){return tc==='r'?'<span class="tg tgr">'+tx+'</span>':tc==='g'?'<span class="tg tgg">'+tx+'</span>':tc==='b'?'<span class="tg tgb">'+tx+'</span>':'<span class="tg">'+tx+'</span>'}
+
+// Race mini-games deadlines (just before race start)
+const RACE_DEADLINES={1:"2026-03-01T09:00:00+01:00",2:"2026-03-22T19:00:00+01:00",3:"2026-03-29T21:00:00+02:00",4:"2026-04-26T14:00:00+02:00",5:"2026-05-10T14:00:00+02:00",6:"2026-05-17T14:00:00+02:00",7:"2026-05-31T14:00:00+02:00",8:"2026-06-07T14:00:00+02:00",9:"2026-06-21T14:00:00+02:00",10:"2026-06-28T14:00:00+02:00",11:"2026-07-12T14:00:00+02:00",12:"2026-08-09T15:00:00+02:00",13:"2026-08-30T14:00:00+02:00",14:"2026-09-13T14:00:00+02:00",15:"2026-09-20T14:00:00+02:00",16:"2026-10-04T07:00:00+02:00",17:"2026-10-11T08:00:00+02:00",18:"2026-10-25T05:00:00+01:00",19:"2026-11-01T08:00:00+01:00",20:"2026-11-08T19:00:00+01:00",21:"2026-11-15T14:00:00+01:00",22:"2026-11-22T14:00:00+01:00"};
+var RACE_H2H_RESULTS={};
+var RACE_CRASH_RESULTS={};
+var RACE_TOP5_RESULTS={};
+var RACE_FL_TIMES={};
+const DEADLINES={1:"2026-03-01T06:50:00+01:00",2:"2026-03-21T14:50:00+01:00",3:"2026-03-28T19:50:00+01:00",4:"2026-04-25T13:50:00+01:00",5:"2026-05-09T13:50:00+01:00",6:"2026-05-16T13:50:00+01:00",7:"2026-05-30T13:50:00+01:00",8:"2026-06-06T13:50:00+01:00",9:"2026-06-20T13:50:00+01:00",10:"2026-06-27T13:50:00+01:00",11:"2026-07-11T13:50:00+01:00",12:"2026-08-08T13:50:00+01:00",13:"2026-08-29T13:50:00+01:00",14:"2026-09-12T13:50:00+01:00",15:"2026-09-19T13:50:00+01:00",16:"2026-10-03T07:50:00+01:00",17:"2026-10-10T08:50:00+01:00",18:"2026-10-24T04:50:00+01:00",19:"2026-10-31T08:50:00+01:00",20:"2026-11-07T17:50:00+01:00",21:"2026-11-14T14:50:00+01:00",22:"2026-11-21T14:50:00+01:00"};
+
+// Pole times for Chrono Predictor scoring
+var POLE_TIMES={1:"1:29.183",2:"1:17.410"};
+// H2H Sprint results for scoring: [duel_idx] = winning rider id
+var H2H_RESULTS={2:{0:1,1:5,2:12,3:8}};
+// Crash results for scoring: [gpId] = rider who crashed first (from qualifs: Bagnaia first to crash in Q2)
+var CRASH_RESULTS={2:2};
+// Grid predictor: actual top 5 of Sprint
+var GRID_RESULTS={2:[1,12,5,4,14]};
+let S,vw="splash",sg=null,st="pick",rp=null,bt={pole:null,crash:null,weather:null,winner:null},jk=false,bd=null,mo=false,mpl=false,curSess=null;
+function ld(){try{S=JSON.parse(localStorage.getItem("gp11"))}catch(e){}if(!S)S={u:null,p:[],ch:[],mg:{}};if(!S.mg)S.mg={}}
+function sv(){try{localStorage.setItem("gp11",JSON.stringify(S))}catch(e){}}
+function me(){return S.u?S.p.find(p=>p.ph===S.u):null}
+function us(){const m={};R.forEach(r=>m[r.id]=0);(me()?.pk||[]).forEach(p=>{m[p.r]=(m[p.r]||0)+1});return m}
+ld();
+// Auto-login: if user already logged in, skip splash
+if(S.u&&me())vw="home";
+
+/* Countdown */
+let cdI=null;
+function startCD(){if(cdI)clearInterval(cdI);cdI=setInterval(()=>{
+  const el=document.getElementById('live-cd');if(!el)return;
+  const live=G.find(g=>g.st==="live")||G.find(g=>g.st==="next");if(!live)return;
+  const dl=DEADLINES[live.id];if(!dl)return;
+  const now=new Date(),target=new Date(dl),diff=Math.max(0,target-now);
+  if(diff<=0){el.innerHTML='<div style="text-align:center;font-family:var(--ff);font-size:11px;font-weight:900;color:var(--red);text-transform:uppercase;letter-spacing:2px;animation:pulse 1.5s infinite">🔒 JEUX VERROUILLÉS</div>';return}
+  const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+  el.innerHTML='<div class="countdown">'+(d>0?'<div class="cd-unit"><div class="cd-val">'+d+'</div><div class="cd-lbl">Jours</div></div>':'')+'<div class="cd-unit"><div class="cd-val">'+String(h).padStart(2,'0')+'</div><div class="cd-lbl">Heures</div></div><div class="cd-unit"><div class="cd-val">'+String(m).padStart(2,'0')+'</div><div class="cd-lbl">Min</div></div><div class="cd-unit"><div class="cd-val">'+String(s).padStart(2,'0')+'</div><div class="cd-lbl">Sec</div></div></div>';
+  // Next session
+  const nse=document.getElementById('next-sess');
+  if(nse&&live.sessData){
+    const ns=live.sessData.find(ss=>now<new Date(ss.start));
+    if(ns){const d2=new Date(ns.start)-now,h2=Math.floor(d2/3600000),m2=Math.floor((d2%3600000)/60000);
+    nse.innerHTML='Prochaine: <b style="color:var(--yel)">'+ns.full+'</b> dans <b>'+h2+'h'+String(m2).padStart(2,'0')+'</b>';}
+    else nse.innerHTML='<span style="color:var(--grn)">Sessions terminées pour aujourd\'hui</span>';
+  }
+},1000)}
+
+/* Music */
+let actx=null,mTO=null,mTk=0;
+const TK=[{bpm:140,mel:[220,261,329,293,349,329,261,220],ty:"sawtooth"},{bpm:128,mel:[330,294,262,294,330,370,330,294],ty:"square"}];
+function mkM(){if(actx)stM();actx=new(window.AudioContext||window.webkitAudioContext)();const g=actx.createGain();g.gain.value=.04;g.connect(actx.destination);const t=TK[mTk%TK.length];function lp(){const c=actx.currentTime,b=60/t.bpm;for(let i=0;i<16;i++){const tm=c+i*b,o=actx.createOscillator(),gn=actx.createGain();o.type=t.ty;o.frequency.value=t.mel[i%t.mel.length];gn.gain.setValueAtTime(.06,tm);gn.gain.exponentialRampToValueAtTime(.001,tm+b);o.connect(gn);gn.connect(g);o.start(tm);o.stop(tm+b)}mTO=setTimeout(lp,16*(60/t.bpm)*1000-50)}lp()}
+function stM(){if(mTO)clearTimeout(mTO);if(actx){actx.close().catch(()=>{});actx=null;mTO=null}}
+function tAu(){const b=document.getElementById("mb");if(mpl){stM();b.textContent="🔇";mpl=false}else{mkM();b.textContent="🔊";mpl=true}}
+document.getElementById("mb").addEventListener("dblclick",()=>{if(mpl){mTk++;stM();mkM()}});
+
+/* Nav */
+function tM(){mo=!mo;document.getElementById("hb").className=mo?"ham x":"ham";document.getElementById("dm").className=mo?"dd on":"dd"}
+document.addEventListener("click",function(e){if(mo&&!e.target.closest(".dd")&&!e.target.closest(".ham")){mo=false;document.getElementById("hb").className="ham";document.getElementById("dm").className="dd"}});
+// Timezone: store reference UTC offset for each GP
+// CET=+1, CEST=+2 (European summer time March-Oct)
+// GPs 1-3: CET (+1), GPs 4-22: CEST (+2) except 18-22 back to CET (+1)
+var GP_UTC_OFFSET={1:1,2:1,3:2,4:2,5:2,6:2,7:2,8:2,9:2,10:2,11:2,12:2,13:2,14:2,15:2,16:2,17:2,18:1,19:1,20:1,21:1,22:1};
+
+function convertTime(timeStr, gpId){
+  // timeStr is "HH:MM" in French time (CET/CEST)
+  // Convert to local timezone
+  var parts=timeStr.split(':');
+  var h=parseInt(parts[0]),m=parseInt(parts[1]||0);
+  // French UTC offset for this GP
+  var frOffset=GP_UTC_OFFSET[gpId]||1;
+  // Create a UTC date
+  var utcH=h-frOffset;
+  // Get local offset in hours
+  var localOffset=-new Date().getTimezoneOffset()/60;
+  // Convert to local
+  var localH=utcH+localOffset;
+  // Normalize
+  while(localH<0)localH+=24;
+  while(localH>=24)localH-=24;
+  return String(Math.floor(localH)).padStart(2,'0')+':'+String(m).padStart(2,'0');
+}
+
+function getTimezoneLabel(){
+  try{return Intl.DateTimeFormat().resolvedOptions().timeZone.split('/').pop().replace(/_/g,' ')}catch(e){return 'locale'}
+}
+
+// Bug report system
+function openBugReport(){
+  var overlay=document.createElement('div');
+  overlay.id='bug-overlay';
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:999;display:flex;align-items:center;justify-content:center;padding:16px';
+  overlay.onclick=function(e){if(e.target===overlay)overlay.remove()};
+  var box=document.createElement('div');
+  box.style.cssText='background:#1a1a1a;border:1px solid var(--red);border-radius:14px;padding:20px;max-width:400px;width:100%';
+  box.innerHTML='<div style="font-family:var(--ff);font-size:16px;font-weight:900;color:var(--red);text-align:center;margin-bottom:4px">🐛 SIGNALER UN BUG</div>'
+    +'<div style="font-size:10px;color:#888;text-align:center;margin-bottom:12px">Décris le problème et Mich le corrigera</div>'
+    +'<div style="margin-bottom:8px"><label style="font-size:9px;color:#888;font-weight:700;display:block;margin-bottom:2px">📋 TYPE DE BUG</label>'
+    +'<select id="bugType" style="width:100%;padding:10px;background:#222;border:1px solid #333;border-radius:8px;color:#fff;font-size:12px;cursor:pointer!important;-webkit-user-select:text!important;user-select:text!important;caret-color:var(--yel)!important">'
+    +'<option>Page blanche / erreur</option>'
+    +'<option>Mini-jeux ne marchent pas</option>'
+    +'<option>Points/XP incorrects</option>'
+    +'<option>Horaires incorrects</option>'
+    +'<option>Profil / connexion</option>'
+    +'<option>Chat ne marche pas</option>'
+    +'<option>Autre</option></select></div>'
+    +'<div style="margin-bottom:8px"><label style="font-size:9px;color:#888;font-weight:700;display:block;margin-bottom:2px">📝 DÉCRIS LE PROBLÈME</label>'
+    +'<textarea id="bugDesc" rows="4" placeholder="Quel est le problème ? Sur quelle page ?" style="width:100%;padding:10px;background:#222;border:1px solid #333;border-radius:8px;color:#fff;font-size:12px;resize:none;cursor:text!important;-webkit-user-select:text!important;user-select:text!important;caret-color:var(--yel)!important"></textarea></div>'
+    +'<div style="margin-bottom:12px"><label style="font-size:9px;color:#888;font-weight:700;display:block;margin-bottom:2px">📸 MESSAGE D ERREUR (si visible)</label>'
+    +'<textarea id="bugErr" rows="2" placeholder="Copie le message d erreur rouge si tu en vois un..." style="width:100%;padding:10px;background:#222;border:1px solid #333;border-radius:8px;color:#ff6666;font-size:10px;resize:none;font-family:monospace;cursor:text!important;-webkit-user-select:text!important;user-select:text!important;caret-color:var(--yel)!important"></textarea></div>'
+    +'<button onclick="submitBug()" class="bt" style="background:var(--red);color:#fff;cursor:pointer!important">ENVOYER LE RAPPORT 🐛</button>'
+    +'<button onclick="document.getElementById(\'bug-overlay\').remove()" class="bt" style="background:var(--c2);color:#888;margin-top:4px;cursor:pointer!important">ANNULER</button>';
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+  // Close menu
+  document.getElementById("hb").className="ham";document.getElementById("dm").className="dd";mo=false;
+}
+
+function submitBug(){
+  var type=document.getElementById('bugType').value;
+  var desc=document.getElementById('bugDesc').value;
+  var err=document.getElementById('bugErr').value;
+  var p=me();
+  if(!desc.trim()){alert('Décris le problème !');return}
+  var report={
+    type:type,
+    desc:desc,
+    err:err,
+    user:p?p.nm:'inconnu',
+    page:vw,
+    time:new Date().toISOString(),
+    ua:navigator.userAgent.substring(0,100)
+  };
+  // Save to Firebase
+  if(typeof firebaseReady!=='undefined'&&firebaseReady&&db){
+    db.ref('bugs/'+Date.now()).set(report);
+  }
+  // Also save locally
+  var bugs=JSON.parse(localStorage.getItem('gp_bugs')||'[]');
+  bugs.push(report);
+  localStorage.setItem('gp_bugs',JSON.stringify(bugs));
+  // Close modal
+  document.getElementById('bug-overlay').remove();
+  // Show confirmation
+  var toast=document.createElement('div');
+  toast.style.cssText='position:fixed;top:60px;left:50%;transform:translateX(-50%);background:var(--grn);color:#000;padding:12px 20px;border-radius:8px;font-family:var(--ff);font-size:12px;font-weight:900;z-index:999;text-align:center';
+  toast.textContent='✅ Bug signalé ! Mich va le corriger.';
+  document.body.appendChild(toast);
+  setTimeout(function(){toast.remove()},3000);
+}
+
+function toggleSched(gpId,btn){
+  var el=document.getElementById('sched_'+gpId);
+  if(!el)return;
+  if(el.style.display==='block'){el.style.display='none';btn.textContent='📋 VOIR HORAIRES COMPLETS ▼';return}
+  var sc=SCHED[gpId];
+  if(!sc){el.innerHTML='<div style="font-size:8px;color:var(--t3);padding:4px">Horaires non disponibles</div>';el.style.display='block';return}
+  var h='<div style="margin-top:6px;background:var(--c2);border-radius:6px;padding:8px;border:1px solid var(--bd)">';
+  var tzLabel=getTimezoneLabel();
+  var isLocal=Math.abs(-new Date().getTimezoneOffset()/60-GP_UTC_OFFSET[gpId])>0.1;
+  h+='<div style="font-family:var(--ff);font-size:9px;font-weight:900;color:var(--yel);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">🕐 Programme complet <span style="color:var(--grn)">(heure '+tzLabel+')</span></div>';
+  // Vendredi
+  h+='<div style="margin-bottom:6px"><div style="font-size:9px;font-weight:900;color:var(--red);margin-bottom:3px">VENDREDI</div>';
+  sc.ven.forEach(function(s){h+='<div style="display:flex;justify-content:space-between;padding:2px 0;font-size:10px"><span style="color:#bbb">'+s.s+'</span><span style="color:#fff;font-weight:700;font-family:var(--ff)">'+convertTime(s.t,gpId)+'</span></div>';});
+  h+='</div>';
+  // Samedi
+  h+='<div style="margin-bottom:6px"><div style="font-size:9px;font-weight:900;color:var(--yel);margin-bottom:3px">SAMEDI</div>';
+  sc.sam.forEach(function(s){var isRace=s.s==='Sprint';h+='<div style="display:flex;justify-content:space-between;padding:2px 0;font-size:10px"><span style="color:'+(isRace?'var(--yel)':'#bbb')+'">'+s.s+'</span><span style="color:'+(isRace?'var(--yel)':'#fff')+';font-weight:700;font-family:var(--ff)">'+convertTime(s.t,gpId)+'</span></div>';});
+  h+='</div>';
+  // Dimanche
+  h+='<div><div style="font-size:9px;font-weight:900;color:var(--grn);margin-bottom:3px">DIMANCHE</div>';
+  sc.dim.forEach(function(s){var isRace=s.s==='Course';h+='<div style="display:flex;justify-content:space-between;padding:2px 0;font-size:10px"><span style="color:'+(isRace?'var(--grn)':'#bbb')+'">'+s.s+'</span><span style="color:'+(isRace?'var(--grn)':'#fff')+';font-weight:700;font-family:var(--ff)">'+convertTime(s.t,gpId)+'</span></div>';});
+  h+='</div></div>';
+  el.innerHTML=h;
+  el.style.display='block';
+  btn.textContent='📋 MASQUER HORAIRES ▲';
+}
+function nav(v){vw=v;mo=false;if(v!=="weekend"&&v!=="session"){st="pick";rp=null;bt={pole:null,crash:null,weather:null,winner:null};jk=false;bd=null}document.getElementById("hb").className="ham";document.getElementById("dm").className="dd";ren();scrollTo(0,0);setTimeout(function(){document.activeElement.blur()},10)}
+
+function ren(){
+const p=me();document.getElementById("hd").className=S.u&&vw!=="splash"?"on":"";document.getElementById("mb").style.display=S.u&&vw!=="splash"?"block":"none";
+document.querySelectorAll(".pg").forEach(e=>e.classList.remove("on"));const el=document.getElementById("p-"+vw);if(el)el.classList.add("on");
+if(vw==="splash")rSp();else if(vw==="home"&&p)rHm(p);else if(vw==="riders")rRd();else if(vw==="calendar")rCl(p);
+else if(vw==="weekend")rWk(p);else if(vw==="news")rNw();else if(vw==="standings")rSt();else if(vw==="games")rGm(p);
+else if(vw==="chat"&&p)rCh(p);else if(vw==="quests"&&p)rQu(p);else if(vw==="rules")rRu();else if(vw==="profile"&&p)rPr(p);
+else if(vw==="session")rSess();else if(vw==="live")rLive();
+document.activeElement.blur();window.focus();
+sv();startCD()}
+
+/* ═══ SESSION DETAIL — full results with times ═══ */
+function showSess(gpId,idx){curSess={gpId,idx};vw="session";document.querySelectorAll(".pg").forEach(e=>e.classList.remove("on"));document.getElementById("p-session").classList.add("on");rSess();scrollTo(0,0)}
+
+function rSess(){
+  if(!curSess)return;
+  const g=G.find(x=>x.id===curSess.gpId);
+  const sess=g?.sessData?.[curSess.idx];
+  if(!sess){document.getElementById("p-session").innerHTML='<button class="bt bgl bsm" onclick="nav(\'home\')">← Retour</button><div class="cd" style="text-align:center;padding:20px">Pas de données</div>';return}
+  const now=new Date(),start=new Date(sess.start),end=new Date(sess.end);
+  const isLive=now>=start&&now<end,isDone=now>=end,isUp=now<start;
+  let h='<button class="bt bgl bsm" onclick="nav(\'home\')" style="margin-bottom:10px">← Retour</button>';
+  h+='<div style="font-family:var(--ff);font-size:9px;font-weight:700;color:var(--red);letter-spacing:3px;text-transform:uppercase;margin-bottom:4px">'+FL[g.cc]+' '+g.n+' — R'+g.id+'</div>';
+  // Header
+  h+='<div class="cd" style="border-color:'+(isLive?'var(--red)':isDone?'var(--grn)':'var(--yel)')+';padding:14px">';
+  if(isLive)h+='<span class="live-dot"></span><span class="tg tgr">EN DIRECT</span> ';
+  else if(isDone)h+='<span class="tg tgg">TERMINÉE</span> ';
+  else h+='<span class="tg">À VENIR</span> ';
+  h+='<span style="font-size:9px;color:var(--t3)">'+sess.cet+'</span>';
+  h+='<div style="font-family:var(--ff);font-size:20px;font-weight:900;margin-top:6px;color:var(--yel)">'+sess.full+'</div>';
+  var wStr=sess.weather?(' • '+(sess.weather==='wet'?'🌧️ Mouillé':sess.weather==='mixed'?'🌦️ Mixte':'☀️ Sec')):'';
+  h+='<div style="font-size:10px;color:var(--t2);margin-top:3px">Durée: '+sess.dur+' min'+wStr+'</div>';
+  if(sess.notes)h+='<div style="font-size:10px;color:#bbb;background:var(--c2);border-radius:6px;padding:8px;margin-top:8px;line-height:1.5;border-left:3px solid var(--yel)">'+sess.notes+'</div>';
+  // Countdown if upcoming
+  if(isUp){var df=start-now,hrs=Math.floor(df/3600000),mns=Math.floor((df%3600000)/60000);
+  h+='<div style="text-align:center;margin-top:10px;background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.15);border-radius:8px;padding:10px"><div style="font-size:9px;color:var(--t3);text-transform:uppercase;font-weight:700;letter-spacing:2px">DÉBUT DANS</div><div style="font-family:var(--ff);font-size:24px;font-weight:900;color:var(--yel);margin-top:4px">'+hrs+'h '+String(mns).padStart(2,'0')+'min</div></div>';}
+  h+='</div>';
+
+  // Results table
+  if(sess.res&&sess.res.length>0){
+    h+='<div style="font-family:var(--ff);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--yel);margin:12px 0 6px">📊 CLASSEMENT COMPLET</div>';
+    var bestTime=sess.res[0].t;
+    sess.res.forEach(function(res,i){
+      var rd=R.find(function(x){return x.id===res.rid});
+      if(!rd)return;
+      var isTop3=i<3,isTop10=i<10;
+      var medals=['🥇','🥈','🥉'];
+      var inQ2=sess.q2&&sess.q2.indexOf(res.rid)>=0;
+      var inQ1=sess.q1&&sess.q1.indexOf(res.rid)>=0;
+      h+='<div style="display:flex;align-items:center;gap:5px;padding:5px 6px;background:'+(isTop3?'rgba(255,215,0,.06)':isTop10?'rgba(0,200,83,.03)':'var(--c2)')+';border-radius:6px;margin-bottom:2px;border:1px solid '+(isTop3?'rgba(255,215,0,.15)':isTop10?'rgba(0,200,83,.08)':'transparent')+'">';
+      h+='<span style="font-family:var(--ff);font-weight:900;font-size:11px;width:24px;text-align:center;color:'+(isTop3?'var(--yel)':'var(--t3)')+'">'+(isTop3?medals[i]:'P'+(i+1))+'</span>';
+      h+=pAvInline(rd,20);
+      h+='<div style="flex:1;min-width:0"><div style="font-family:var(--ff);font-size:10px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+FL[rd.c]+' '+rd.n+'</div><div style="font-size:7px;color:var(--t3)">'+rd.t+'</div></div>';
+      h+='<span style="font-family:monospace;font-size:10px;color:'+(i===0?'var(--yel)':'var(--t2)')+'">'+res.t+'</span>';
+      if(inQ2)h+=' <span style="font-size:6px;background:var(--grn);color:#000;padding:1px 3px;border-radius:2px;font-weight:800">Q2</span>';
+      if(inQ1)h+=' <span style="font-size:6px;background:var(--red);color:#fff;padding:1px 3px;border-radius:2px;font-weight:800">Q1</span>';
+      h+='</div>';
+    });
+    // Q2/Q1 summary
+    if(sess.q2){
+      h+='<div style="margin-top:10px;padding:10px;background:var(--c2);border-radius:8px">';
+      h+='<div style="font-family:var(--ff);font-size:9px;font-weight:700;color:var(--grn);letter-spacing:2px;margin-bottom:4px">✅ DIRECT EN Q2</div>';
+      h+='<div style="display:flex;flex-wrap:wrap;gap:3px">';
+      sess.q2.forEach(function(rid){var rd=R.find(function(x){return x.id===rid});if(rd)h+='<span style="display:inline-flex;align-items:center;gap:2px;background:rgba(0,200,83,.1);border:1px solid rgba(0,200,83,.3);border-radius:4px;padding:2px 6px;font-size:9px;font-weight:700;color:var(--grn)">'+rd.nm+' '+rd.n.split(" ").pop()+'</span>';});
+      h+='</div>';
+      h+='<div style="font-family:var(--ff);font-size:9px;font-weight:700;color:var(--red);letter-spacing:2px;margin:8px 0 4px">⚠️ DOIVENT PASSER Q1</div>';
+      h+='<div style="display:flex;flex-wrap:wrap;gap:3px">';
+      sess.q1.forEach(function(rid){var rd=R.find(function(x){return x.id===rid});if(rd)h+='<span style="display:inline-flex;align-items:center;gap:2px;background:rgba(225,6,0,.1);border:1px solid rgba(225,6,0,.3);border-radius:4px;padding:2px 6px;font-size:9px;font-weight:700;color:var(--red)">'+rd.nm+' '+rd.n.split(" ").pop()+'</span>';});
+      h+='</div></div>';
+    }
+  } else if(!isUp){
+    var sessStatus=isDone?'terminée':isLive?'en cours':'pas encore commencée';
+h+='<div class="cd" style="text-align:center;padding:20px">';
+if(isLive){h+='<div style="font-size:32px;margin-bottom:6px;animation:pulse 1.5s infinite">🔴</div><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--red)">SESSION EN COURS</div><div style="font-size:10px;color:var(--t2);margin-top:4px">Les résultats apparaîtront automatiquement dès la fin de la session</div><div style="margin-top:8px"><a href="https://www.motogp.com/en" target="_blank" class="bt br bsm" style="text-decoration:none">📺 Suivre sur MotoGP.com</a></div>';}
+else if(isDone){h+='<div style="font-size:32px;margin-bottom:6px">⏳</div><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--yel)">RÉSULTATS EN COURS DE CHARGEMENT</div><div style="font-size:10px;color:var(--t2);margin-top:4px">Session terminée — recherche automatique en cours</div><div style="margin-top:8px"><button class="bt bsm" style="background:var(--yel);color:#000" onclick="fetchLiveResults()">🔄 Chercher les résultats maintenant</button></div>';}
+h+='</div>';
+  }
+  document.getElementById("p-session").innerHTML=h;
+}
+
+/* ═══ SPLASH ═══ */
+function rSp(){
+var mode=window._authMode||'login';
+var h='<div style="text-align:center;padding-top:30px">';
+h+='<div style="margin-bottom:8px"><svg viewBox="0 0 80 80" width="70" height="70" style="display:block;margin:0 auto"><circle cx="40" cy="40" r="38" fill="none" stroke="var(--red)" stroke-width="3"/><circle cx="40" cy="40" r="30" fill="none" stroke="var(--yel)" stroke-width="2" stroke-dasharray="8 5"/><circle cx="40" cy="40" r="22" fill="rgba(225,6,0,.15)"/><text x="40" y="46" text-anchor="middle" fill="var(--yel)" font-family="sans-serif" font-weight="900" font-size="22">GP</text></svg></div>';
+h+='<div style="font-family:var(--ff);font-size:42px;font-weight:900;text-transform:uppercase;letter-spacing:5px;line-height:.95"><span style="color:#fff">GP</span> <span style="color:var(--yel)">ENTRE POTES</span></div>';
+h+='<div style="font-family:var(--ff);font-size:12px;color:var(--t3);letter-spacing:5px;text-transform:uppercase;margin-top:5px">MotoGP Fantasy • Saison 2026</div>';
+h+='<div style="height:3px;width:80px;background:linear-gradient(90deg,var(--red),var(--yel));margin:12px auto;border-radius:9px"></div>';
+// Tabs
+h+='<div class="cd" style="border-radius:14px;padding:22px;max-width:380px;margin:0 auto">';
+h+='<div style="display:flex;gap:0;margin-bottom:16px;border-radius:8px;overflow:hidden;border:1px solid var(--bd)">';
+h+='<button onclick="window._authMode=\'login\';ren()" style="flex:1;padding:10px;border:none;cursor:pointer;font-family:var(--ff);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;background:'+(mode==='login'?'var(--yel)':'var(--c2)')+';color:'+(mode==='login'?'#000':'var(--t3)')+'">🔑 CONNEXION</button>';
+h+='<button onclick="window._authMode=\'register\';ren()" style="flex:1;padding:10px;border:none;cursor:pointer;font-family:var(--ff);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;background:'+(mode==='register'?'var(--grn)':'var(--c2)')+';color:'+(mode==='register'?'#000':'var(--t3)')+'">✨ INSCRIPTION</button>';
+h+='</div>';
+
+if(mode==='login'){
+  h+='<div style="font-size:11px;color:var(--t2);margin-bottom:12px;text-align:center">Connecte-toi avec ton pseudo et mot de passe</div>';
+  h+='<div style="margin-bottom:8px"><label style="font-size:9px;color:var(--t2);font-weight:700;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:1px">👤 PSEUDO</label><input type="text" id="iNm" placeholder="Ton pseudo..." style="width:100%;padding:11px;background:var(--c2);border:1px solid var(--bd);border-radius:8px;font-size:14px;outline:none;color:#fff" autocomplete="username"></div>';
+  h+='<div style="margin-bottom:14px"><label style="font-size:9px;color:var(--t2);font-weight:700;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:1px">🔒 MOT DE PASSE</label><div style="position:relative"><input type="password" id="iPw" placeholder="Mot de passe..." style="width:100%;padding:11px 40px 11px 11px;background:var(--c2);border:1px solid var(--bd);border-radius:8px;font-size:14px;outline:none;color:#fff" onkeydown="if(event.key===\'Enter\')doLogin()" autocomplete="current-password"><button onclick="var i=document.getElementById(\'iPw\');var b=this;if(i.type===\'password\'){i.type=\'text\';b.textContent=\'🙈\'}else{i.type=\'password\';b.textContent=\'👁️\'}" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;padding:4px">👁️</button></div></div>';
+  h+='<div id="loginErr" style="display:none;color:var(--red);font-size:10px;font-weight:700;margin-bottom:8px;text-align:center"></div>';
+  h+='<button class="bt by bw" onclick="doLogin()">SE CONNECTER →</button>';
+  h+='<div style="font-size:9px;color:var(--t3);margin-top:10px;text-align:center">Pas encore de compte ? <a style="color:var(--grn);cursor:pointer;font-weight:700" onclick="window._authMode=\'register\';ren()">Inscris-toi ici</a></div>';
+} else {
+  h+='<div style="font-size:11px;color:var(--t2);margin-bottom:12px;text-align:center">Crée ton compte pour rejoindre la ligue</div>';
+  h+='<div style="margin-bottom:8px"><label style="font-size:9px;color:var(--t2);font-weight:700;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:1px">👤 CHOISIS TON PSEUDO</label><input type="text" id="iNmR" placeholder="Ton pseudo unique..." style="width:100%;padding:11px;background:var(--c2);border:1px solid var(--bd);border-radius:8px;font-size:14px;outline:none;color:#fff"></div>';
+  h+='<div style="margin-bottom:8px"><label style="font-size:9px;color:var(--t2);font-weight:700;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:1px">🔒 CRÉE TON MOT DE PASSE</label><div style="position:relative"><input type="password" id="iPwR" placeholder="Min. 3 caractères..." style="width:100%;padding:11px 40px 11px 11px;background:var(--c2);border:1px solid var(--bd);border-radius:8px;font-size:14px;outline:none;color:#fff" autocomplete="new-password"><button onclick="var i=document.getElementById(\'iPwR\');var b=this;if(i.type===\'password\'){i.type=\'text\';b.textContent=\'🙈\'}else{i.type=\'password\';b.textContent=\'👁️\'}" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;padding:4px">👁️</button></div></div>';
+  h+='<div style="margin-bottom:14px"><label style="font-size:9px;color:var(--t2);font-weight:700;display:block;margin-bottom:2px;text-transform:uppercase;letter-spacing:1px">🔒 CONFIRME LE MOT DE PASSE</label><input type="password" id="iPwR2" placeholder="Retape le mot de passe..." style="width:100%;padding:11px;background:var(--c2);border:1px solid var(--bd);border-radius:8px;font-size:14px;outline:none;color:#fff" onkeydown="if(event.key===\'Enter\')doRegister()" autocomplete="new-password"></div>';
+  h+='<div id="regErr" style="display:none;color:var(--red);font-size:10px;font-weight:700;margin-bottom:8px;text-align:center"></div>';
+  h+='<button class="bt bw" style="background:var(--grn);color:#000" onclick="doRegister()">CRÉER MON COMPTE ✨</button>';
+  h+='<div style="font-size:9px;color:var(--t3);margin-top:10px;text-align:center">Déjà un compte ? <a style="color:var(--yel);cursor:pointer;font-weight:700" onclick="window._authMode=\'login\';ren()">Connecte-toi ici</a></div>';
+}
+h+='</div></div>';
+document.getElementById("p-splash").innerHTML=h}
+
+function hashPw(pw){var h=0;for(var i=0;i<pw.length;i++){h=((h<<5)-h)+pw.charCodeAt(i);h|=0}return Math.abs(h).toString(36)}
+
+function doLogin(){
+  var nm=(document.getElementById("iNm").value||"").trim();
+  var pw=document.getElementById("iPw").value||"";
+  var err=document.getElementById("loginErr");
+  err.style.display="none";
+  if(!nm){err.style.display="block";err.textContent="Entre ton pseudo";return}
+  if(!pw){err.style.display="block";err.textContent="Entre ton mot de passe";return}
+  var existing=S.p.find(function(p){return p.nm.toLowerCase()===nm.toLowerCase()});
+  if(!existing){err.style.display="block";err.textContent="❌ Pseudo inconnu — inscris-toi d'abord";return}
+  var pwHash=hashPw(pw);
+  if(existing.pwHash&&existing.pwHash!==pwHash){err.style.display="block";err.textContent="❌ Mot de passe incorrect";return}
+  if(!existing.pwHash)existing.pwHash=pwHash;
+  S.u=existing.ph;sv();nav("home");
+}
+
+function doRegister(){
+  var nm=(document.getElementById("iNmR").value||"").trim();
+  var pw=document.getElementById("iPwR").value||"";
+  var pw2=document.getElementById("iPwR2").value||"";
+  var err=document.getElementById("regErr");
+  err.style.display="none";
+  if(!nm||nm.length<2){err.style.display="block";err.textContent="Pseudo trop court (2 caractères min)";return}
+  if(!pw||pw.length<3){err.style.display="block";err.textContent="Mot de passe trop court (3 caractères min)";return}
+  if(pw!==pw2){err.style.display="block";err.textContent="❌ Les mots de passe ne correspondent pas";return}
+  var existing=S.p.find(function(p){return p.nm.toLowerCase()===nm.toLowerCase()});
+  if(existing){err.style.display="block";err.textContent="❌ Ce pseudo est déjà pris, choisis-en un autre";return}
+  var ph="u_"+nm.toLowerCase().replace(/[^a-z0-9]/g,"")+"_"+Date.now().toString(36);
+  var pwHash=hashPw(pw);
+  S.p.push({ph:ph,nm:nm,pwHash:pwHash,tp:0,xp:0,jk:2,pk:[],sc:{},qd:[],av:"🏍️",fav:null,favTeam:null,favCircuit:null});
+  S.u=ph;sv();nav("profile");
+}
+
+// Keep old doSu for compatibility
+function doSu(){doLogin()}
+
+/* ═══ HOME ═══ */
+function rHm(p){
+var sr=[...S.p].sort(function(a,b){return b.tp-a.tp}),rk=sr.findIndex(function(x){return x.ph===S.u})+1;
+var live=G.find(function(g){return g.st==="live"});
+var h='';
+if(live){var li=G.indexOf(live),pk=p.pk&&p.pk.some(function(x){return x.raceId===live.id});
+var sessSt=getSessSt(live);
+h+='<div style="background:linear-gradient(135deg,#111,#1a1a1a);border:2px solid var(--red);border-radius:14px;padding:16px;margin-bottom:14px;position:relative;overflow:hidden"><div style="position:absolute;top:0;right:0;bottom:0;width:40%;background:linear-gradient(135deg,transparent,#e1060010)"></div><div style="position:relative;z-index:1"><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span class="live-dot"></span><span style="font-family:var(--ff);font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:2px">WEEK-END EN COURS</span></div>';
+h+='<div style="font-family:var(--ff);font-size:24px;font-weight:900;text-transform:uppercase;letter-spacing:2px">'+(FL[live.cc]||'')+' '+live.n+'</div>';
+h+='<div style="font-size:11px;color:var(--t2);margin-top:2px">'+live.ci+' — '+fd(live.dt)+'</div>';
+h+='<div style="margin:8px 0 4px"><div style="font-size:8px;color:var(--t3);text-transform:uppercase;font-weight:700;letter-spacing:1.5px">⏰ Clôture jeux (Q1)</div><div id="live-cd"></div></div>';
+h+='<div style="font-size:9px;color:var(--t2);margin-bottom:6px" id="next-sess"></div>';
+// Session timeline
+if(live.sessData){h+='<div class="sess">';live.sessData.forEach(function(s,i){var st2=sessSt[i]||0;
+h+='<div class="sess-item '+(st2===2?'done':st2===1?'live':'next')+'" onclick="showSess('+live.id+','+i+')">'+s.name+'<span class="st">'+s.cet+'</span></div>';});h+='</div>';}
+h+='<div style="display:flex;gap:8px;margin-top:12px"><button class="bt by" onclick="sg='+li+';nav(\'weekend\')">'+(pk?'MES CHOIX':'FAIRE MES CHOIX →')+'</button><button class="bt bgl bsm" onclick="nav(\'games\')">🎮 MINI-JEUX</button></div></div></div>';}
+// Stats
+h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div><div id="last-upd" style="font-size:7px;color:var(--t3)"></div><div id="fetch-status" style="font-size:8px"></div></div><button class="bt bsm" style="background:var(--c2);color:var(--red);border:1px solid var(--red)" onclick="nav(\'live\')">🎙️ LIVE</button></div>';
+h+='<div class="g4" style="margin-bottom:10px">';
+[{l:"Points",v:p.tp,i:"🏆"},{l:"Jokers",v:p.jk,i:"⚡"},{l:"Rang",v:rk+"e",i:"📊"},{l:"Quêtes",v:(p.qd||[]).length+"/"+QS.length,i:"🎯"}].forEach(function(s){h+='<div class="cd" style="text-align:center;padding:6px 3px"><div style="font-size:11px">'+s.i+'</div><div style="font-family:var(--ff);font-size:15px;font-weight:900;color:var(--yel)">'+s.v+'</div><div style="font-size:6px;color:var(--t3);font-weight:700;text-transform:uppercase">'+s.l+'</div></div>';});h+='</div>';
+// Quick nav
+h+='<div class="g2" style="margin-bottom:10px"><div class="mg" onclick="nav(\'games\')" style="cursor:pointer"><div style="font-size:18px">🎮</div><div style="font-family:var(--ff);font-size:12px;font-weight:900;text-transform:uppercase;color:var(--yel)">Mini-Jeux</div></div><div class="mg" onclick="nav(\'standings\')" style="cursor:pointer"><div style="font-size:18px">🏆</div><div style="font-family:var(--ff);font-size:12px;font-weight:900;text-transform:uppercase;color:var(--red)">Classement</div></div></div>';
+// News
+h+='<div style="font-family:var(--ff);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--t3);margin-bottom:6px">📰 ACTUALITÉS</div>';
+var nC=["#dc2626","#2563eb","#16a34a","#b8860b","#ea580c","#0891b2"];
+NW.forEach(function(n,i){h+='<div class="cd" style="padding:8px 10px;cursor:pointer" onclick="nav(\'news\')"><div>'+tgH(n.tc,n.tg)+' <span style="font-size:8px;color:var(--t3)">'+n.dt+'</span></div><div style="font-family:var(--ff);font-size:12px;font-weight:900;margin-top:3px;line-height:1.25">'+n.t+'</div></div>';});
+document.getElementById("p-home").innerHTML=h}
+
+/* ═══ RIDERS ═══ */
+function rRd(){var h='<div style="font-family:var(--ff);font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:3px;text-align:center;margin-bottom:12px">🏍️ PILOTES <span style="color:var(--yel)">2026</span></div><div class="gr">';
+R.forEach(function(r){var c=tC(r.r);h+='<div class="cd" style="padding:8px;text-align:center;position:relative">'+pAv(r,'pav')+'<div style="position:absolute;top:5px;right:5px;min-width:20px;height:20px;border-radius:10px;background:'+c+';color:#000;display:flex;align-items:center;justify-content:center;font-family:var(--ff);font-weight:900;font-size:8px;padding:0 3px">'+r.r+'</div><div style="font-family:var(--ff);font-size:10px;font-weight:700;text-transform:uppercase">'+FL[r.c]+' '+r.n+'</div><div style="font-size:8px;color:var(--t2)">'+r.t+'</div><div style="margin-top:2px"><span style="font-size:6px;font-weight:800;color:'+c+';font-family:var(--ff)">'+ti(r.r)+'</span> <span style="font-size:7px;color:var(--t3)">#'+r.nm+'</span></div></div>';});
+h+='</div>';document.getElementById("p-riders").innerHTML=h}
+
+/* ═══ CALENDAR ═══ */
+function rCl(p){var h='<div style="font-family:var(--ff);font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:3px;text-align:center;margin-bottom:4px">📅 CALENDRIER <span style="color:var(--yel)">2026</span></div>';
+h+='<div style="text-align:center;font-size:9px;color:var(--red);font-weight:700;margin-bottom:10px">⚠️ CHOIX AVANT VENDREDI 23H59 — Horaires en heure française (CET)</div>';
+var STD="FP1 15:05 • Prac 19:20 • Q 14:50 • Sprint 19:00 • Race Dim 19:00";
+var SCH={1:"FP1 9:05 • Prac 13:20 • Q 8:50 • Sprint 13:00 • Race 13:00",2:"FP1 16:05 • Prac 20:00 • Q 14:50 • Sprint 19:00 • Race 19:00",3:"FP1 21:05 • Prac 1:20 • Q 20:50 • Sprint 1:00 • Race 1:00",16:"FP1 8:05 • Prac 12:20 • Q 7:50 • Sprint 12:00 • Race 12:00",17:"FP1 9:05 • Prac 13:20 • Q 8:50 • Sprint 13:00 • Race 13:00",18:"FP1 5:05 • Prac 9:20 • Q 4:50 • Sprint 9:00 • Race 9:00",19:"FP1 9:05 • Prac 13:20 • Q 8:50 • Sprint 13:00 • Race 13:00",20:"FP1 18:05 • Prac 22:20 • Q 17:50 • Sprint 22:00 • Race 22:00"};
+G.forEach(function(g,i){var d=g.st==="done",lv=g.st==="live",pk=p&&p.pk&&p.pk.some(function(x){return x.raceId===g.id}),pt=p&&p.sc?p.sc[g.id]:undefined;
+var sched=SCH[g.id]||STD;
+h+='<div class="cd" style="padding:10px 12px;cursor:pointer;'+(lv?'border-color:var(--red);border-width:2px':'')+'" onclick="sg='+i+';nav(\'weekend\')">';
+h+='<div style="display:flex;align-items:center;gap:8px"><div style="font-family:var(--ff);font-size:13px;font-weight:900;color:'+(d?'var(--t3)':lv?'var(--red)':'var(--yel)')+';width:20px;text-align:center">'+g.id+'</div><div style="flex:1"><div style="font-family:var(--ff);font-size:10px;font-weight:700;text-transform:uppercase">'+FL[g.cc]+' '+g.n+'</div><div style="font-size:8px;color:var(--t3)">'+g.ci+' — '+fd(g.dt)+'</div></div><div>'+(lv?'<span class="live-dot"></span><span class="tg tgr">LIVE</span>':'')+(d&&pk?'<span style="font-family:var(--ff);font-weight:900;font-size:12px;color:'+(pt>0?'var(--grn)':'var(--red)')+'">'+((pt>0?'+':'')+pt)+'</span>':'')+(d&&!pk?'<span style="font-size:7px;color:var(--red)">0pt</span>':'')+'</div></div>';
+if(!d){
+h+='<div style="font-size:9px;color:var(--t3);margin-top:4px;padding-left:28px;line-height:1.5">';
+var spT=g.sprint?g.sprint.replace('Sam ','').replace('Dim ',''):'';
+var raT=g.race?g.race.replace('Sam ','').replace('Dim ',''):'';
+var tzL2=getTimezoneLabel();
+if(g.sprint)h+='🏁 Sprint: <span style="color:var(--yel);font-weight:700">Sam '+convertTime(spT,g.id)+'</span> • ';
+if(g.race)h+='🏆 Course: <span style="color:var(--grn);font-weight:700">Dim '+convertTime(raT,g.id)+'</span>';
+h+=' <span style="font-size:7px;opacity:.7">('+tzL2+')</span>';
+if(g.note)h+='<div style="color:var(--red);font-size:8px;margin-top:2px">'+g.note+'</div>';
+h+='<div style="margin-top:4px"><button onclick="event.stopPropagation();toggleSched('+g.id+',this)" style="background:none;border:1px solid var(--bd);border-radius:4px;padding:3px 8px;font-size:8px;color:var(--yel);cursor:pointer;font-family:var(--ff);font-weight:700">📋 VOIR HORAIRES COMPLETS ▼</button></div>';
+h+='<div id="sched_'+g.id+'" style="display:none"></div>';
+h+='</div>';
+}
+h+='</div>';});
+document.getElementById("p-calendar").innerHTML=h}
+
+/* ═══ WEEKEND ═══ */
+function rWk(p){if(sg===null)return;var g=G[sg],rs=RES[g.id],dn=p&&p.pk&&p.pk.some(function(x){return x.raceId===g.id}),si=["pick","bets","result"].indexOf(st);
+var h='<div class="cdark" style="margin-bottom:10px;border-color:var(--yel)"><div style="font-family:var(--ff);font-size:9px;font-weight:700;color:var(--yel);letter-spacing:3px">MANCHE '+g.id+'/22</div><div style="font-family:var(--ff);font-size:18px;font-weight:900;text-transform:uppercase;letter-spacing:2px;margin-top:2px">'+FL[g.cc]+' '+g.n+'</div><div style="font-size:10px;color:var(--t2)">'+g.ci+' — '+fd(g.dt)+'</div>';
+// Session bar
+if(g.sessData){var sessSt=getSessSt(g);h+='<div class="sess">';g.sessData.forEach(function(s,i){var st2=sessSt[i]||0;h+='<div class="sess-item '+(st2===2?'done':st2===1?'live':'')+'" onclick="showSess('+g.id+','+i+')">'+s.name+'<span class="st">'+s.cet+'</span></div>';});h+='</div>';}
+h+='</div>';
+// Show full schedule on weekend page
+if(SCHED[g.id]){
+  var sc=SCHED[g.id];
+  h+='<div class="cd" style="margin-bottom:10px"><div style="font-family:var(--ff);font-size:10px;font-weight:900;color:var(--yel);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px">🕐 PROGRAMME <span style=\"color:var(--grn)\">('+getTimezoneLabel()+')</span></div>';
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">';
+  // Vendredi
+  h+='<div><div style="font-size:10px;font-weight:900;color:var(--red);margin-bottom:4px;text-align:center">VENDREDI</div>';
+  sc.ven.forEach(function(s){h+='<div style="padding:3px 0;font-size:10px;text-align:center"><div style="color:#888;font-size:8px">'+s.s+'</div><div style="color:#fff;font-weight:700;font-family:var(--ff)">'+convertTime(s.t,g.id)+'</div></div>';});
+  h+='</div>';
+  // Samedi
+  h+='<div><div style="font-size:10px;font-weight:900;color:var(--yel);margin-bottom:4px;text-align:center">SAMEDI</div>';
+  sc.sam.forEach(function(s){var isR=s.s==='Sprint';h+='<div style="padding:3px 0;font-size:10px;text-align:center;'+(isR?'background:rgba(255,215,0,.1);border-radius:4px':'')+'"><div style="color:'+(isR?'var(--yel)':'#888')+';font-size:8px">'+s.s+'</div><div style="color:'+(isR?'var(--yel)':'#fff')+';font-weight:700;font-family:var(--ff)">'+convertTime(s.t,g.id)+'</div></div>';});
+  h+='</div>';
+  // Dimanche
+  h+='<div><div style="font-size:10px;font-weight:900;color:var(--grn);margin-bottom:4px;text-align:center">DIMANCHE</div>';
+  sc.dim.forEach(function(s){var isR=s.s==='Course';h+='<div style="padding:3px 0;font-size:10px;text-align:center;'+(isR?'background:rgba(0,200,83,.1);border-radius:4px':'')+'"><div style="color:'+(isR?'var(--grn)':'#888')+';font-size:8px">'+s.s+'</div><div style="color:'+(isR?'var(--grn)':'#fff')+';font-weight:700;font-family:var(--ff)">'+convertTime(s.t,g.id)+'</div></div>';});
+  h+='</div></div></div>';
+}
+
+if(dn&&st==="pick")h+='<div class="cd" style="text-align:center;padding:20px">✅ DÉJÀ JOUÉ — '+((p.sc[g.id]||0)>0?'+':'')+(p.sc[g.id]||0)+' pts<br><button class="bt br" style="margin-top:8px" onclick="nav(\'calendar\')">←</button></div>';
+else if(!rs&&st==="pick"&&!dn)h+='<div class="cd" style="text-align:center;padding:20px">⏳ RÉSULTATS PAS ENCORE DISPO<br><button class="bt br" style="margin-top:8px" onclick="nav(\'calendar\')">←</button></div>';
+else if(st==="pick"&&!dn&&rs){var u=us();
+h+='<div style="font-family:var(--ff);font-size:12px;font-weight:900;text-transform:uppercase;color:var(--yel);margin-bottom:6px">👤 CHOISIS TON PILOTE</div><div class="gr" style="margin-bottom:8px">';
+R.forEach(function(r){var sel=rp===r.id,ul=3-(u[r.id]||0),c=tC(r.r);h+='<div class="rc'+(sel?' sel':'')+(ul<=0?' dis':'')+'" onclick="'+(ul>0?'rp='+r.id+';ren()':'')+'">'+pAv(r,'pavS')+'<div style="font-family:var(--ff);font-size:8px;font-weight:700;text-transform:uppercase">'+FL[r.c]+' '+r.n.split(" ").pop()+'</div><div style="font-size:6px;color:var(--t3)">'+ti(r.r)+' '+r.r+' • '+ul+'/3</div></div>';});
+h+='</div><button class="bt by bw" '+(rp?'':'disabled')+' onclick="st=\'bets\';ren()">SUIVANT → PARIS</button>';}
+else if(st==="bets"){var rider=R.find(function(x){return x.id===rp}),ab=Object.values(bt).filter(function(v){return v!=null}).length;
+h+='<div style="font-family:var(--ff);font-size:12px;font-weight:900;text-transform:uppercase;color:var(--yel);margin-bottom:6px">🎯 PARIS ('+ab+'/2)</div>';
+[{k:"pole",l:"POLE",d:"+5",nr:1},{k:"crash",l:"CHUTE",d:"+5/-2",nr:1},{k:"weather",l:"MÉTÉO",d:"+3",nr:0},{k:"winner",l:"VAINQUEUR",d:"+10",nr:1}].forEach(function(b){var on=bt[b.k]!=null,cn=ab<2||on;
+h+='<div class="cd" style="padding:8px;opacity:'+(cn?1:.2)+'"><div style="display:flex;justify-content:space-between;align-items:center"><div><b style="font-family:var(--ff);font-size:10px">'+b.l+'</b> <span style="font-size:8px;color:var(--t3)">'+b.d+'</span></div><button class="bt bsm" style="background:'+(on?'var(--yel)':'transparent')+';color:'+(on?'#000':'var(--t2)')+'" onclick="tB(\''+b.k+'\','+b.nr+','+(cn||on)+')">'+(on?'✓':'+')+'</button></div>';
+if(on&&b.k==="weather")h+='<div style="display:flex;gap:4px;margin-top:4px"><button class="bt bsm" style="flex:1;'+(bt.weather==='dry'?'background:var(--yel);color:#000':'background:var(--c3);color:#fff')+'" onclick="bt.weather=\'dry\';ren()">☀️ SEC</button><button class="bt bsm" style="flex:1;'+(bt.weather==='rain'?'background:var(--yel);color:#000':'background:var(--c3);color:#fff')+'" onclick="bt.weather=\'rain\';ren()">🌧️ PLUIE</button></div>';
+if(on&&b.nr){h+='<select onchange="bt.'+b.k+'=+this.value;ren()" style="width:100%;margin-top:4px;padding:5px;border-radius:4px;border:1px solid var(--bd);background:var(--c3);color:#fff;font-size:10px">';R.forEach(function(r){h+='<option value="'+r.id+'"'+(bt[b.k]===r.id?' selected':'')+'>'+r.n+'</option>';});h+='</select>';}
+h+='</div>';});
+h+='<div style="display:flex;gap:5px;margin-top:8px"><button class="bt bgl bsm" onclick="st=\'pick\';ren()">←</button><button class="bt by bw" onclick="doSb()">🏁 VALIDER</button></div>';}
+else if(st==="result"&&bd){/* result display - same logic as before */
+var rider=R.find(function(x){return x.id===bd.ri}),rs2=RES[bd.ra];
+h+='<div class="cd" style="border-color:var(--yel)"><div style="font-family:var(--ff);font-size:10px;font-weight:700;color:var(--yel);margin-bottom:4px">📊 TOTAL</div>';
+bd.ln.forEach(function(b){h+='<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #222;font-size:10px"><span>'+b.l+'</span><b style="font-family:var(--ff);color:'+(b.p>0?'var(--grn)':'var(--red)')+'">'+(b.p>0?'+':'')+b.p+'</b></div>';});
+h+='<div style="display:flex;justify-content:space-between;padding:8px 0 0;font-family:var(--ff);font-size:16px;font-weight:900"><span>TOTAL</span><span style="color:'+(bd.pt>0?'var(--yel)':'var(--red)')+'">'+(bd.pt>0?'+':'')+bd.pt+' PTS</span></div></div>';
+h+='<button class="bt by bw" onclick="nav(\'calendar\')">← CALENDRIER</button>';}
+document.getElementById("p-weekend").innerHTML=h}
+
+function tB(k,nr,cn){if(bt[k]!=null)bt[k]=null;else if(cn)bt[k]=k==="weather"?"dry":(rp||R[0].id);ren()}
+function doSb(){var p=me(),g=G[sg],rs=RES[g.id];if(!p||!rs)return;var rr=rs.race.find(function(x){return x.rid===rp});var pt=0,ln=[];
+if(rr){if(rr.p===-1){pt-=5;ln.push({l:"💥 DNF",p:-5})}else{var pp=PM[rr.p]||0;pt+=pp;ln.push({l:"🏁 P"+rr.p,p:pp})}}
+var rider=R.find(function(x){return x.id===rp}),bn=rb2(rider.r);if(bn>0){pt+=bn;ln.push({l:"⭐ Note("+rider.r+")",p:bn})}
+var be=Object.entries(bt).filter(function(e){return e[1]!=null});
+be.forEach(function(e){var k=e[0],v=e[1];if(k==="pole"){if(v===rs.pole){pt+=5;ln.push({l:"✅Pole",p:5})}else ln.push({l:"❌Pole",p:0})}if(k==="crash"){if(rs.race.find(function(x){return x.rid===v&&x.p===-1})){pt+=5;ln.push({l:"✅Chute",p:5})}else{pt-=2;ln.push({l:"❌Chute",p:-2})}}if(k==="weather"){if(v===rs.weather){pt+=3;ln.push({l:"✅Météo",p:3})}else ln.push({l:"❌Météo",p:0})}if(k==="winner"){if(v===rs.winner){pt+=10;ln.push({l:"✅Vainqueur",p:10})}else ln.push({l:"❌Vainqueur",p:0})}});
+if(jk){var ex=pt;pt*=2;ln.push({l:"⚡JKR×2",p:ex})}
+bd={pt:pt,ln:ln,ra:g.id,ri:rp,bt:Object.assign({},bt),jk:jk};
+var idx=S.p.findIndex(function(x){return x.ph===S.u});if(idx>=0){var u=S.p[idx];u.tp+=pt;if(jk)u.jk--;u.pk.push({raceId:g.id,r:rp,hb:be.length>0});u.sc[g.id]=pt;var xG=Math.max(0,pt)*2;if(!u.qd)u.qd=[];QS.forEach(function(q){if(u.qd.indexOf(q.id)<0&&q.ck(u)){u.qd.push(q.id);xG+=q.xp}});}
+st="result";sv();ren()}
+
+/* ═══ NEWS ═══ */
+function rNw(){var h='<div style="font-family:var(--ff);font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:3px;text-align:center;margin-bottom:12px">📰 ACTUALITÉS</div>';
+NW.forEach(function(n){h+='<div class="cd" style="cursor:pointer;padding:0;overflow:hidden" onclick="var nb=this.querySelector(\'.nb\');nb.style.display=nb.style.display===\'block\'?\'none\':\'block\'"><div style="padding:10px 12px">'+tgH(n.tc,n.tg)+' <span style="font-size:8px;color:var(--t3)">'+n.dt+'</span><div style="font-family:var(--ff);font-size:13px;font-weight:900;margin-top:4px;line-height:1.3">'+n.t+'</div>'+(n.sub?'<div style="font-size:10px;color:var(--t2);margin-top:2px;font-style:italic">'+n.sub+'</div>':'')+'</div><div class="nb" style="display:none;padding:10px 12px;background:#0f0f0f"><p style="font-size:11px;color:#bbb;line-height:1.6;margin-bottom:6px">'+n.s+'</p>'+(n.stats?'<div style="background:var(--c2);border-radius:5px;padding:6px 8px;border-left:3px solid var(--yel);font-size:9px;color:#aaa">'+n.stats+'</div>':'')+'</div></div>';});
+document.getElementById("p-news").innerHTML=h}
+
+/* ═══ STANDINGS ═══ */
+function rSt(){var sr=[...S.p].sort(function(a,b){return b.tp-a.tp});var h='<div style="font-family:var(--ff);font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:3px;text-align:center;margin-bottom:12px">🏆 CLASSEMENT</div>';
+if(!sr.length)h+='<div style="text-align:center;color:var(--t3);padding:20px">Aucun joueur</div>';
+sr.forEach(function(p,i){var lv=gl(p.xp||0);h+='<div class="cd" style="padding:8px 10px;display:flex;justify-content:space-between;align-items:center"><div style="display:flex;align-items:center;gap:6px"><span style="font-family:var(--ff);font-size:14px;font-weight:900;color:'+(i===0?'var(--yel)':i<3?'#ccc':'var(--t3)')+'">'+(i<3?['🥇','🥈','🥉'][i]:i+1)+'</span><div><div style="font-family:var(--ff);font-size:11px;font-weight:900;text-transform:uppercase">'+p.nm+(p.ph===S.u?' <span style="font-size:7px;color:var(--red)">TOI</span>':'')+'</div><div style="font-size:7px;color:var(--t3)">Niv.'+lv.l+'</div></div></div><span style="font-family:var(--ff);font-size:16px;font-weight:900;color:'+(i===0?'var(--yel)':'#fff')+'">'+p.tp+'<span style="font-size:7px;color:var(--t3)">pts</span></span></div>';});
+document.getElementById("p-standings").innerHTML=h}
+
+/* ═══ GAMES ═══ */
+function rGm(p){try{if(!p){document.getElementById('p-games').innerHTML='<div class="cd" style="text-align:center;padding:20px">Connecte-toi d\'abord !<br><button class="bt by" style="margin-top:8px" onclick="nav(\'splash\')">CONNEXION</button></div>';return}var live=G.find(function(g){return g.st==="live"})||G[0];if(!live){document.getElementById('p-games').innerHTML='<div class="cd">Aucun GP actif</div>';return}
+var tab=window._gmTab||'sprint';
+// Sprint locks at Q1, Race locks at race start
+var dlS=DEADLINES[live.id],dlSD=dlS?new Date(dlS):null;
+var dlR=RACE_DEADLINES[live.id],dlRD=dlR?new Date(dlR):null;
+var now=new Date();
+var isLS=dlSD&&now>=dlSD; // Sprint locked?
+var isLR=dlRD&&now>=dlRD; // Race locked?
+
+var h='<div style="font-family:var(--ff);font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:3px;text-align:center;margin-bottom:4px">🎮 MINI-JEUX</div>';
+h+='<div style="text-align:center;font-size:10px;color:var(--t2);margin-bottom:8px">'+(FL[live.cc]||'')+' '+live.n+'</div>';
+
+// Tabs Sprint / Course
+h+='<div style="display:flex;gap:0;margin-bottom:10px;border-radius:8px;overflow:hidden;border:1px solid var(--bd)">';
+h+='<button onclick="window._gmTab=\'sprint\';ren()" style="flex:1;padding:10px;border:none;cursor:pointer;font-family:var(--ff);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;background:'+(tab==='sprint'?'var(--red)':'var(--c2)')+';color:'+(tab==='sprint'?'#fff':'var(--t3)')+'">🏁 SPRINT</button>';
+h+='<button onclick="window._gmTab=\'race\';ren()" style="flex:1;padding:10px;border:none;cursor:pointer;font-family:var(--ff);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;background:'+(tab==='race'?'var(--grn)':'var(--c2)')+';color:'+(tab==='race'?'#000':'var(--t3)')+'">🏆 COURSE</button>';
+h+='</div>';
+
+var isL=tab==='sprint'?isLS:isLR;
+var suffix=tab==='race'?'_race':'';
+var lockLabel=tab==='sprint'?'DÉBUT Q1':'DÉBUT COURSE';
+
+if(isL)h+='<div style="background:#1a0000;border:1px solid var(--red);border-radius:8px;padding:8px;text-align:center;margin-bottom:10px;font-family:var(--ff);font-size:10px;font-weight:900;color:var(--red)">🔒 JEUX '+( tab==='sprint'?'SPRINT':'COURSE')+' VERROUILLÉS</div>';
+else h+='<div style="background:rgba(255,215,0,.03);border:1px solid rgba(255,215,0,.2);border-radius:8px;padding:8px;text-align:center;margin-bottom:10px"><div style="font-size:9px;color:var(--yel);font-weight:700;font-family:var(--ff)">⏰ FERMETURE: '+lockLabel+'</div><div id="live-cd"></div></div>';
+
+// ═══ CHRONO ═══
+var chronoLabel=tab==='sprint'?'⏱️ CHRONO POLE':'⏱️ MEILLEUR TOUR COURSE';
+var chronoPlaceholder=tab==='sprint'?'1:17.500':'1:18.500';
+var ck='chrono'+suffix+'_'+live.id,hC=S.mg[ck];
+var chronoRef=tab==='sprint'?POLE_TIMES[live.id]:RACE_FL_TIMES[live.id];
+h+='<div class="cd"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--yel)">'+chronoLabel+'</div>';
+h+='<div style="font-size:8px;color:var(--t3);margin-top:2px">'+(tab==='sprint'?'Prédit le temps de la pole position':'Prédit le meilleur tour en course')+'</div>';
+if(hC){
+  var scoredKey='chrono_scored'+suffix+'_'+live.id;
+  var diff=S.mg[scoredKey];
+  h+='<div style="margin-top:6px;text-align:center"><div style="font-family:var(--ff);font-size:18px;font-weight:900;color:var(--yel)">Ta prédiction: '+hC+'</div>';
+  if(chronoRef){
+    h+='<div style="font-size:11px;color:var(--t2);margin-top:4px">'+(tab==='sprint'?'Temps pole':'Meilleur tour')+': <b style="color:var(--grn)">'+chronoRef+'</b></div>';
+    if(diff!==undefined){
+      var xpGain=diff<=0.5?50:diff<=1.0?25:diff<=2.0?10:0;
+      var diffColor=diff<=0.5?'var(--grn)':diff<=1.0?'var(--yel)':diff<=2.0?'var(--t2)':'var(--red)';
+      h+='<div style="font-size:12px;font-weight:900;color:'+diffColor+';margin-top:2px">Écart: '+diff.toFixed(3)+'s → +'+xpGain+' XP '+(diff<=0.5?'🎯 PARFAIT !':diff<=1.0?'👍 Bien !':diff<=2.0?'OK':'😅')+'</div>';
+    }
+  } else {
+    h+='<div style="font-size:9px;color:var(--t3);margin-top:2px">✅ Enregistré — résultat après '+(tab==='sprint'?'les qualifs':'la course')+'</div>';
+  }
+  h+='</div>';
+}
+else h+='<div style="display:flex;gap:4px;margin-top:6px"><input id="chrIn" placeholder="'+chronoPlaceholder+'" style="flex:1;padding:8px;background:var(--c3);border:1px solid var(--bd);border-radius:5px;font-family:var(--ff);font-size:14px;font-weight:700;color:var(--yel);text-align:center;outline:none" '+(isL?'disabled':'')+'><button class="bt by" onclick="sC(\''+ck+'\')" '+(isL?'disabled':'')+'>OK</button></div>';
+h+='</div>';
+
+// ═══ H2H ═══
+var h2hLabel=tab==='sprint'?'⚔️ H2H SPRINT':'⚔️ H2H COURSE';
+var duelsData=tab==='sprint'?[[1,3],[4,5],[2,12],[8,21]]:[[1,2],[3,5],[4,14],[12,8]];
+var duelsNames=tab==='sprint'?[['Márquez','Acosta'],['Bezzecchi','Martín'],['Bagnaia','DiGia'],['Quartararo','Toprak']]:[['Márquez','Bagnaia'],['Acosta','Martín'],['Bezzecchi','Ogura'],['DiGia','Quartararo']];
+var hk='h2h'+suffix+'_'+live.id,hH=S.mg[hk];
+var h2hResults=tab==='sprint'?H2H_RESULTS[live.id]:RACE_H2H_RESULTS[live.id];
+h+='<div class="cd"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--yel)">'+h2hLabel+'</div>';
+h+='<div style="font-size:8px;color:var(--t3);margin-top:2px">Qui finit devant en '+(tab==='sprint'?'sprint':'course')+' ?</div>';
+if(hH){
+  var h2hScoreKey='h2h_scored'+suffix+'_'+live.id;var h2hScore=S.mg[h2hScoreKey];
+  if(h2hScore!==undefined&&h2hResults){
+    h+='<div style="margin-top:6px"><div style="text-align:center;font-size:12px;font-weight:900;color:'+(h2hScore>=3?'var(--grn)':h2hScore>=2?'var(--yel)':'var(--red)')+'">'+h2hScore+'/4 corrects → +'+(h2hScore*15)+' XP</div>';
+    duelsNames.forEach(function(d,di){
+      var winner=h2hResults[di];var pick=hH[di];var correct=pick===winner;
+      var winnerR=R.find(function(x){return x.id===winner})||{n:'?',nm:'?'};
+      var pickR=R.find(function(x){return x.id===pick})||{n:'?',nm:'?'};
+      h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 6px;margin-top:3px;background:'+(correct?'rgba(0,200,83,.08)':'rgba(225,6,0,.08)')+';border-radius:4px;font-size:9px"><span>'+d[0]+' vs '+d[1]+'</span><span>Choix: <b>'+(pickR?pickR.n.split(" ").pop():"?")+'</b></span><span style="color:'+(correct?'var(--grn)':'var(--red)')+';font-weight:900">'+(correct?'✅':'❌ →'+(winnerR?winnerR.n.split(" ").pop():""))+'</span></div>';
+    });
+    h+='</div>';
+  } else {
+    h+='<div style="margin-top:6px;color:var(--grn);font-weight:700;text-align:center">✅ '+hH.length+' duels enregistrés</div>';
+  }
+}
+else{duelsData.forEach(function(d,i){var a=R.find(function(x){return x.id===d[0]}),b=R.find(function(x){return x.id===d[1]});
+if(!a||!b)return;
+h+='<div style="display:flex;gap:4px;margin-top:4px;align-items:center"><button class="bt bsm" style="flex:1;background:var(--c3);color:#fff" onclick="pH('+i+','+d[0]+',\''+hk+'\')" id="h_'+i+'_'+d[0]+'" '+(isL?'disabled':'')+'>'+a.nm+' '+(a.n||'?').split(' ').pop()+'</button><span style="font-size:8px;color:var(--t3)">VS</span><button class="bt bsm" style="flex:1;background:var(--c3);color:#fff" onclick="pH('+i+','+d[1]+',\''+hk+'\')" id="h_'+i+'_'+d[1]+'" '+(isL?'disabled':'')+'>'+b.nm+' '+(b.n||'?').split(' ').pop()+'</button></div>';});
+h+='<button class="bt by bw" style="margin-top:6px" onclick="sH(\''+hk+'\')" '+(isL?'disabled':'')+'>VALIDER</button>';}
+h+='</div>';
+
+// ═══ CRASH ═══
+var crashLabel=tab==='sprint'?'💥 CRASH SPRINT':'💥 CRASH COURSE';
+var crk='crash'+suffix+'_'+live.id,hCr=S.mg[crk];
+var crashResult=tab==='sprint'?CRASH_RESULTS[live.id]:RACE_CRASH_RESULTS[live.id];
+h+='<div class="cd"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--yel)">'+crashLabel+'</div>';
+h+='<div style="font-size:8px;color:var(--t3);margin-top:2px">Qui sera le 1er à chuter en '+(tab==='sprint'?'sprint':'course')+' ?</div>';
+if(hCr){var crd=R.find(function(x){return x.id===hCr});
+  var crScoreKey='crash_scored'+suffix+'_'+live.id;var crScore=S.mg[crScoreKey];
+  if(crScore!==undefined){
+    var actualCrasher=crashResult;var actualR2=R.find(function(x){return x.id===actualCrasher});
+    h+='<div style="margin-top:6px;text-align:center"><div style="font-size:11px">Ton choix: <b>'+(crd?crd.n:'')+'</b></div><div style="font-size:10px;color:var(--t2)">Réel: <b style="color:#fff">'+(actualR2?actualR2.n:'Aucun crash')+'</b></div><div style="font-size:12px;font-weight:900;color:'+(crScore?'var(--grn)':'var(--red)')+'">'+(crScore?'✅ CORRECT +30 XP':'❌ Raté')+'</div></div>';
+  } else {
+    h+='<div style="margin-top:6px;color:var(--grn);font-weight:700;text-align:center">✅ '+(crd?crd.n:'')+'</div>';
+  }
+}
+else{h+='<select id="crSel" style="width:100%;padding:8px;background:var(--c3);border:1px solid var(--bd);border-radius:5px;color:#fff;font-size:11px;margin-top:6px" '+(isL?'disabled':'')+'>';R.forEach(function(r){if(r)h+='<option value="'+r.id+'">'+r.nm+' '+r.n+'</option>';});h+='</select><button class="bt br bw" style="margin-top:4px" onclick="sCr(\''+crk+'\')" '+(isL?'disabled':'')+'>VALIDER</button>';}
+h+='</div>';
+
+// ═══ TOP 5 ═══
+var gridLabel=tab==='sprint'?'📋 TOP 5 SPRINT':'📋 TOP 5 COURSE';
+var gk='grid'+suffix+'_'+live.id,hG=S.mg[gk];
+var gridRes=tab==='sprint'?GRID_RESULTS[live.id]:RACE_TOP5_RESULTS[live.id];
+h+='<div class="cd"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--yel)">'+gridLabel+'</div>';
+h+='<div style="font-size:8px;color:var(--t3);margin-top:2px">Prédit le top 5 '+(tab==='sprint'?'du sprint':'de la course')+'</div>';
+if(hG){
+  var gridScoreKey='grid_scored'+suffix+'_'+live.id;var gridXP=S.mg[gridScoreKey];
+  hG.forEach(function(id,i){
+    var r=R.find(function(x){return x.id===id});
+    var correct=gridRes&&gridRes[i]===id;
+    var inTop5=gridRes&&gridRes.indexOf(id)>=0;
+    var actualR=gridRes?R.find(function(x){return x.id===gridRes[i]}):null;
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 6px;margin-top:2px;background:'+(correct?'rgba(0,200,83,.1)':inTop5?'rgba(255,215,0,.08)':'rgba(225,6,0,.08)')+';border-radius:4px;font-size:9px"><span style="color:var(--yel);font-weight:900">P'+(i+1)+'</span><span>Choix: <b>'+(r?r.n.split(" ").pop():"?")+'</b></span><span style="color:'+(correct?'var(--grn)':inTop5?'var(--yel)':'var(--red)')+'">'+( correct?'✅ +20':inTop5?'🔄 +10':'❌')+(actualR&&!correct?' (→'+actualR.n.split(" ").pop()+')':'')+'</span></div>';
+  });
+  if(gridXP!==undefined)h+='<div style="text-align:center;font-size:11px;font-weight:900;color:var(--grn);margin-top:4px">Total: +'+gridXP+' XP</div>';
+}
+else{for(var i=1;i<=5;i++){h+='<div style="display:flex;gap:4px;margin-top:3px;align-items:center"><span style="font-family:var(--ff);font-weight:900;font-size:10px;color:var(--yel);width:20px">P'+i+'</span><select id="gp'+i+'" style="flex:1;padding:5px;background:var(--c3);border:1px solid var(--bd);border-radius:4px;color:#fff;font-size:10px" '+(isL?'disabled':'')+'>';R.forEach(function(r){if(r&&r.nm)h+='<option value="'+r.id+'">'+r.nm+' '+r.n+'</option>';});h+='</select></div>';}
+h+='<button class="bt by bw" style="margin-top:6px" onclick="sG(\''+gk+'\')" '+(isL?'disabled':'')+'>VALIDER</button>';}
+h+='</div>';
+document.getElementById("p-games").innerHTML=h}catch(e){console.log('Games error:',e);document.getElementById('p-games').innerHTML='<div class="cd" style="padding:20px;text-align:center"><div style="color:var(--red)">Erreur mini-jeux: '+e.message+'</div></div>'}}
+
+var h2hP={};
+function pH(i,rid){h2hP[i]=rid;document.querySelectorAll('[id^="h_'+i+'_"]').forEach(function(b){b.style.background='var(--c3)';b.style.color='#fff'});var el=document.getElementById('h_'+i+'_'+rid);if(el){el.style.background='var(--yel)';el.style.color='#000';}}
+function sH(k){var picks=Object.values(h2hP);if(picks.length<4)return alert('Choisis tous les duels !');S.mg[k]=picks;var p=me();if(p)p.xp=(p.xp||0)+10;sv();h2hP={};ren()}
+function sC(k){var v=document.getElementById('chrIn');if(!v||!v.value)return;S.mg[k]=v.value;var p=me();if(p)p.xp=(p.xp||0)+10;sv();ren()}
+function sCr(k){var v=parseInt(document.getElementById('crSel').value);if(!v)return;S.mg[k]=v;var p=me();if(p)p.xp=(p.xp||0)+10;sv();ren()}
+function sG(k){var picks=[];for(var i=1;i<=5;i++){var v=parseInt(document.getElementById('gp'+i).value);if(v)picks.push(v)}if(picks.length<5)return;S.mg[k]=picks;var p=me();if(p)p.xp=(p.xp||0)+15;sv();ren()}
+
+/* ═══ CHAT ═══ */
+function rCh(p){var h='<div style="font-family:var(--ff);font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:2px;text-align:center;margin-bottom:6px;color:var(--yel)">💬 CHAT</div><div id="cB" style="background:var(--c1);border:1px solid var(--bd);border-radius:10px;padding:8px;margin-bottom:6px;height:50vh;overflow:auto">';
+if(!S.ch.length)h+='<div style="text-align:center;color:var(--t3);padding:20px;font-size:10px">1er message !</div>';
+S.ch.forEach(function(m){var mi=m.f===p.nm;h+='<div style="display:flex;justify-content:'+(mi?'flex-end':'flex-start')+';margin-bottom:4px"><div style="max-width:70%;padding:5px 8px;border-radius:8px;background:'+(mi?'var(--red)':'var(--c2)')+';color:#fff;font-size:10px">'+(mi?'':'<div style="font-size:6px;font-weight:700;color:var(--yel)">'+m.f+'</div>')+m.m+'</div></div>';});
+h+='</div><div style="display:flex;gap:4px"><input type="text" id="cI" placeholder="Message..." style="flex:1;padding:7px;background:var(--c2);border:1px solid var(--bd);border-radius:6px;font-size:10px;outline:none;color:#fff" onkeydown="if(event.key===\'Enter\')doCh()"><button class="bt br" onclick="doCh()">↑</button></div>';
+document.getElementById("p-chat").innerHTML=h;setTimeout(function(){var b=document.getElementById("cB");if(b)b.scrollTop=b.scrollHeight},30)}
+function doCh(){var i=document.getElementById("cI");if(!i||!i.value.trim())return;S.ch.push({f:me().nm,m:i.value.trim(),t:Date.now()});sv();rCh(me())}
+
+/* ═══ QUESTS ═══ */
+function rQu(p){
+var doneCount=0;QS.forEach(function(q){if((p.qd||[]).indexOf(q.id)>=0)doneCount++});
+var h='<div style="font-family:var(--ff);font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:3px;text-align:center;margin-bottom:4px;color:var(--yel)">🎯 QUÊTES</div>';
+h+='<div style="text-align:center;font-size:11px;color:var(--t2);margin-bottom:10px">'+doneCount+' / '+QS.length+' complétées</div>';
+h+='<div style="height:6px;background:var(--c2);border-radius:9px;margin-bottom:12px"><div style="height:100%;width:'+(doneCount/QS.length*100)+'%;background:linear-gradient(90deg,var(--grn),var(--yel));border-radius:9px"></div></div>';
+// Group by cat
+var cats={};QS.forEach(function(q){var c=q.cat||"Autre";if(!cats[c])cats[c]=[];cats[c].push(q)});
+Object.keys(cats).forEach(function(cat){
+h+='<div style="font-family:var(--ff);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin:10px 0 4px">'+cat+'</div>';
+cats[cat].forEach(function(q){var d=(p.qd||[]).indexOf(q.id)>=0;
+h+='<div class="cd" style="padding:6px 8px;display:flex;align-items:center;gap:6px;'+(d?'border-color:rgba(0,200,83,.3)':'')+'"><div style="width:20px;height:20px;border-radius:50%;background:'+(d?'var(--grn)':'var(--c2)')+';display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid '+(d?'var(--grn)':'var(--bd)')+';color:'+(d?'#000':'var(--t3)')+';font-weight:900;flex-shrink:0">'+(d?'✓':'')+'</div><div style="flex:1"><div style="font-size:10px;font-weight:700;color:'+(d?'var(--grn)':'#fff')+'">'+q.t+'</div><div style="font-size:8px;color:var(--t3)">'+q.d+'</div></div><span style="font-family:var(--ff);font-size:10px;font-weight:900;color:'+(d?'var(--grn)':'var(--yel)')+'">+'+q.xp+'</span></div>';});});
+// Weekend quests
+h+='<div style="font-family:var(--ff);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin:12px 0 4px">📅 Quêtes Week-end</div>';
+G.filter(function(g){return g.st==="done"||g.st==="live"}).forEach(function(g){
+h+='<div style="font-size:9px;font-weight:700;color:var(--red);margin:4px 0 2px">'+FL[g.cc]+' '+g.n+'</div>';
+[{id:"w"+g.id+"_1",t:"Participer",xp:30},{id:"w"+g.id+"_2",t:"Parier",xp:20},{id:"w"+g.id+"_3",t:"Points positifs",xp:40}].forEach(function(q){
+var d=(p.qd||[]).indexOf(q.id)>=0;
+h+='<div style="background:'+(d?'rgba(0,200,83,.05)':'var(--c1)')+';border:1px solid '+(d?'rgba(0,200,83,.2)':'var(--bd)')+';border-radius:4px;padding:3px 6px;margin-bottom:2px;display:flex;align-items:center;gap:4px;font-size:9px"><span>'+(d?'✅':'⬜')+'</span><span style="flex:1;font-weight:600;color:'+(d?'var(--grn)':'#ccc')+'">'+q.t+'</span><span style="font-family:var(--ff);font-weight:700;color:'+(d?'var(--grn)':'var(--yel)')+'">+'+q.xp+'</span></div>';});});
+document.getElementById("p-quests").innerHTML=h}
+
+/* ═══ RULES ═══ */
+function rRu(){
+var h='<div style="font-family:var(--ff);font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:3px;text-align:center;margin-bottom:4px">📖 RÈGLES</div>';
+h+='<div style="text-align:center;font-size:10px;color:var(--t2);margin-bottom:12px">GP Entre Potes — MotoGP Fantasy 2026</div>';
+
+// Principe
+h+='<div class="cd" style="border-left:3px solid var(--yel);padding:14px"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--yel);margin-bottom:6px">🏍️ PRINCIPE DU JEU</div>';
+h+='<p style="font-size:12px;color:#bbb;line-height:1.7">Choisis <b style="color:#fff">1 pilote par GP</b> avant chaque course. Ton pilote te rapporte des points selon son classement en course. Tu peux utiliser chaque pilote <b style="color:var(--yel)">max 3 fois</b> par saison — gère bien ton roster !</p></div>';
+
+// Points
+h+='<div class="cd" style="border-left:3px solid var(--grn);padding:14px"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--grn);margin-bottom:6px">🏆 BARÈME DES POINTS</div>';
+h+='<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:8px">';
+var pts=[{p:"P1",v:"25",c:"var(--yel)"},{p:"P2",v:"20",c:"#ccc"},{p:"P3",v:"16",c:"#cd7f32"},{p:"P4",v:"13",c:"#fff"},{p:"P5",v:"11",c:"#fff"},{p:"P6",v:"10",c:"#fff"},{p:"P7",v:"9",c:"#fff"},{p:"P8",v:"8",c:"#fff"},{p:"P9",v:"7",c:"#fff"},{p:"P10",v:"6",c:"#fff"}];
+pts.forEach(function(x){h+='<div style="text-align:center;background:var(--c2);border-radius:6px;padding:6px 2px"><div style="font-family:var(--ff);font-size:10px;font-weight:900;color:'+x.c+'">'+x.p+'</div><div style="font-family:var(--ff);font-size:16px;font-weight:900;color:'+x.c+'">'+x.v+'</div></div>';});
+h+='</div><div style="font-size:11px;color:var(--red);font-weight:700">💥 Chute = -5 points</div></div>';
+
+// Bonus note
+h+='<div class="cd" style="border-left:3px solid var(--blu);padding:14px"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--blu);margin-bottom:6px">⭐ BONUS NOTE DU PILOTE</div>';
+h+='<div style="font-size:11px;color:#bbb;line-height:1.7">Si ton pilote a une bonne note (attribuée par MotoGP.com après la course) :<br>';
+h+='<span style="color:var(--grn)">≥95 → +3 pts</span> • <span style="color:var(--yel)">≥90 → +2 pts</span> • <span style="color:var(--blu)">≥85 → +1 pt</span></div></div>';
+
+// Paris
+h+='<div class="cd" style="border-left:3px solid #ff6600;padding:14px"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:#ff6600;margin-bottom:6px">🎲 PARIS (max 2 par GP)</div>';
+h+='<div style="font-size:11px;color:#bbb;line-height:1.8">';
+h+='🏁 <b>Pole Position</b> — +5 pts si ton pilote prend la pole<br>';
+h+='💥 <b>Chute</b> — +5 pts si tu devines un crash, -2 pts si faux<br>';
+h+='🌧️ <b>Météo</b> — +3 pts si tu devines pluie ou sec<br>';
+h+='🏆 <b>Vainqueur</b> — +10 pts si tu devines le gagnant</div></div>';
+
+// Jokers
+h+='<div class="cd" style="border-left:3px solid #7c3aed;padding:14px"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:#7c3aed;margin-bottom:6px">🃏 JOKERS (2 par saison)</div>';
+h+='<p style="font-size:11px;color:#bbb;line-height:1.7">Active un joker sur un GP → <b style="color:var(--yel)">tous tes points ×2</b> pour ce GP. Utilise-les stratégiquement !</p></div>';
+
+// Mini-jeux Sprint
+h+='<div class="cd" style="border-left:3px solid var(--red);padding:14px"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--red);margin-bottom:6px">🏁 MINI-JEUX SPRINT (4 jeux)</div>';
+h+='<p style="font-size:10px;color:var(--red);font-weight:700;margin-bottom:4px">⏰ Fermeture : début Q1</p>';
+h+='<div style="font-size:11px;color:#bbb;line-height:1.8">';
+h+='⏱️ <b>Chrono Pole</b> — Prédit le temps de la pole position<br>';
+h+='<span style="font-size:9px;color:var(--t3);margin-left:16px">±0.5s = +50 XP • ±1s = +25 XP • ±2s = +10 XP</span><br>';
+h+='⚔️ <b>H2H Sprint</b> — 4 duels : qui finit devant au sprint ?<br>';
+h+='<span style="font-size:9px;color:var(--t3);margin-left:16px">+15 XP par duel correct</span><br>';
+h+='💥 <b>Crash Sprint</b> — Qui sera le 1er à chuter ?<br>';
+h+='<span style="font-size:9px;color:var(--t3);margin-left:16px">+30 XP si correct</span><br>';
+h+='📋 <b>Top 5 Sprint</b> — Prédit le top 5 du sprint<br>';
+h+='<span style="font-size:9px;color:var(--t3);margin-left:16px">+20 XP position exacte • +10 XP dans le top 5</span></div></div>';
+
+// Mini-jeux Course
+h+='<div class="cd" style="border-left:3px solid var(--grn);padding:14px"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--grn);margin-bottom:6px">🏆 MINI-JEUX COURSE (4 jeux)</div>';
+h+='<p style="font-size:10px;color:var(--grn);font-weight:700;margin-bottom:4px">⏰ Fermeture : juste avant le départ course</p>';
+h+='<div style="font-size:11px;color:#bbb;line-height:1.8">';
+h+='⏱️ <b>Meilleur Tour</b> — Prédit le fastest lap de la course<br>';
+h+='<span style="font-size:9px;color:var(--t3);margin-left:16px">±0.5s = +50 XP • ±1s = +25 XP • ±2s = +10 XP</span><br>';
+h+='⚔️ <b>H2H Course</b> — 4 duels différents du sprint<br>';
+h+='<span style="font-size:9px;color:var(--t3);margin-left:16px">+15 XP par duel correct</span><br>';
+h+='💥 <b>Crash Course</b> — Qui sera le 1er à chuter en course ?<br>';
+h+='<span style="font-size:9px;color:var(--t3);margin-left:16px">+30 XP si correct</span><br>';
+h+='📋 <b>Top 5 Course</b> — Prédit le top 5 de la course<br>';
+h+='<span style="font-size:9px;color:var(--t3);margin-left:16px">+20 XP position exacte • +10 XP dans le top 5</span></div></div>';
+
+// XP & Niveaux
+h+='<div class="cd" style="border-left:3px solid var(--yel);padding:14px"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--yel);margin-bottom:6px">⭐ XP & NIVEAUX</div>';
+h+='<div style="font-size:11px;color:#bbb;line-height:1.7">';
+h+='Les <b style="color:var(--yel)">XP</b> s\'accumulent en jouant aux mini-jeux et en complétant les quêtes. Ils ne comptent pas dans le classement principal (points) mais débloquent des niveaux :<br><br>';
+var lvls=[{l:1,x:0,i:"🏁"},{l:2,x:50,i:"🏍️"},{l:3,x:150,i:"🔥"},{l:4,x:300,i:"⭐"},{l:5,x:500,i:"🏆"},{l:6,x:800,i:"👑"},{l:7,x:1200,i:"💎"},{l:8,x:1800,i:"🐐"},{l:9,x:2500,i:"🌟"},{l:10,x:3500,i:"🏅"}];
+lvls.forEach(function(l){h+='<span style="font-size:10px">'+l.i+' <b>Niv.'+l.l+'</b> = '+l.x+' XP</span> ';});
+h+='</div></div>';
+
+// Deadlines
+h+='<div class="cd" style="border-left:3px solid var(--red);padding:14px"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--red);margin-bottom:6px">⏰ DEADLINES</div>';
+h+='<div style="font-size:11px;color:#bbb;line-height:1.8">';
+h+='📌 <b>Choix pilote + paris</b> : vendredi 23h59 CET<br>';
+h+='🏁 <b>Mini-jeux Sprint</b> : ferment au début de Q1 (samedi matin)<br>';
+h+='🏆 <b>Mini-jeux Course</b> : ferment juste avant le départ de la course (dimanche)<br>';
+h+='💡 <b>Les résultats</b> sont mis à jour après chaque session et les XP se calculent automatiquement</div></div>';
+
+// Quêtes
+h+='<div class="cd" style="border-left:3px solid #ff6600;padding:14px"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:#ff6600;margin-bottom:6px">🎯 QUÊTES (28 quêtes)</div>';
+h+='<p style="font-size:11px;color:#bbb;line-height:1.7">Des objectifs à débloquer qui rapportent de l\'XP : jouer 5 GP, scorer +20 pts, compléter le profil, utiliser un joker, jouer aux mini-jeux, utiliser le chat... Vérifie la page Quêtes pour voir ta progression !</p></div>';
+
+// Horaires auto
+h+='<div class="cd" style="border-left:3px solid var(--grn);padding:14px"><div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--grn);margin-bottom:6px">🌍 HORAIRES AUTOMATIQUES</div>';
+h+='<p style="font-size:11px;color:#bbb;line-height:1.7">Tous les horaires du calendrier s\'adaptent <b style="color:#fff">automatiquement</b> à ton fuseau horaire. Si tu es en France ils sont en heure française, si tu pars en vacances au Japon ils passent en heure japonaise. Clique sur <b style="color:var(--yel)">VOIR HORAIRES COMPLETS</b> dans le calendrier pour voir FP1, Practice, Q1, Q2, Sprint, Warm Up et Course.</p></div>';
+
+document.getElementById("p-rules").innerHTML=h}
+
+/* ═══ PROFILE ═══ */
+var TEAMS=["Ducati Lenovo","Aprilia Racing","Red Bull KTM","Gresini Racing","Trackhouse","Yamaha","KTM Tech3","Honda LCR","Honda HRC","VR46","Pramac Yamaha"];
+var CIRCUITS=["Buriram","Goiânia","Austin","Jerez","Le Mans","Barcelona","Mugello","Balaton Park","Brno","Assen","Sachsenring","Silverstone","Aragón","Misano","Red Bull Ring","Motegi","Mandalika","Phillip Island","Sepang","Losail","Portimão","Valencia"];
+
+function rPr(p){try{if(!p)return;p.favTeam=p.favTeam||null;p.favCircuit=p.favCircuit||null;p.fav=p.fav||null;p.av=p.av||"🏍️";p.qd=p.qd||[];p.xp=p.xp||0;p.tp=p.tp||0;p.pk=p.pk||[];p.jk=p.jk===undefined?2:p.jk;var lv=gl(p.xp),nx=gn(p.xp),pc=Math.min(100,((p.xp)-lv.m)/(nx.m-lv.m)*100);
+var fR=p.fav?R.find(function(r){return r.id===p.fav}):null;
+var fT=p.favTeam||null;var fC=p.favCircuit||null;
+var doneQ=0;QS.forEach(function(q){try{if(p.qd.indexOf(q.id)>=0)doneQ++}catch(e){}});
+var h='<div style="font-family:var(--ff);font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:3px;text-align:center;margin-bottom:10px;color:var(--yel)">👤 CARTE JOUEUR</div>';
+// Card
+h+='<div class="crd" style="border-radius:14px;padding:20px;text-align:center">';
+h+='<div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 6px;border:3px solid rgba(255,255,255,.15)">'+(p.av||'🏍️')+'</div>';
+h+='<div style="font-family:var(--ff);font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:3px">'+p.nm+'</div>';
+h+='<div style="font-size:8px;opacity:.3;margin-top:2px">'+p.ph+'</div>';
+// Level
+h+='<div style="margin-top:8px;display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:10px"><span style="font-size:22px">'+lv.i+'</span><div style="text-align:left"><div style="font-family:var(--ff);font-size:13px;font-weight:900;color:var(--yel)">NIVEAU '+lv.l+'</div><div style="font-size:8px;opacity:.5">'+lv.n+'</div></div></div>';
+// XP bar
+h+='<div style="max-width:200px;margin:8px auto 0"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:7px;font-weight:700">'+(p.xp||0)+' XP</span><span style="font-size:7px;opacity:.3">→ '+nx.m+'</span></div><div style="height:5px;background:rgba(255,255,255,.08);border-radius:9px"><div style="height:100%;width:'+pc+'%;background:linear-gradient(90deg,var(--yel),var(--grn));border-radius:9px"></div></div></div>';
+// Stats grid
+h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:12px">';
+[{l:"Points",v:p.tp,c:"var(--yel)"},{l:"GP joués",v:p.pk.length,c:"#fff"},{l:"Jokers",v:p.jk,c:"#7c3aed"},{l:"Quêtes",v:doneQ+"/"+QS.length,c:"var(--grn)"}].forEach(function(s){
+h+='<div style="background:rgba(0,0,0,.15);border-radius:6px;padding:6px"><div style="font-family:var(--ff);font-size:16px;font-weight:900;color:'+s.c+'">'+s.v+'</div><div style="font-size:6px;opacity:.4;text-transform:uppercase">'+s.l+'</div></div>';});
+h+='</div>';
+// Favorites summary
+if(fR||fT||fC){h+='<div style="margin-top:12px;display:flex;flex-direction:column;gap:6px;align-items:center">';
+if(fR)h+='<div style="background:rgba(255,215,0,.1);border:2px solid rgba(255,215,0,.3);border-radius:10px;padding:8px 16px;display:flex;align-items:center;gap:8px;min-width:200px">'+pAvInline(fR,24)+'<div><div style="font-size:7px;color:var(--t3);text-transform:uppercase;font-weight:700;letter-spacing:1px">Pilote Favori</div><div style="font-size:12px;font-weight:900;color:var(--yel);font-family:var(--ff)">'+fR.n+'</div><div style="font-size:8px;color:var(--t2)">'+fR.t+' • #'+fR.nm+'</div></div></div>';
+if(fT)h+='<div style="background:rgba(41,121,255,.1);border:2px solid rgba(41,121,255,.3);border-radius:10px;padding:8px 16px;min-width:200px"><div style="font-size:7px;color:var(--t3);text-transform:uppercase;font-weight:700;letter-spacing:1px">Équipe Favorite</div><div style="font-size:12px;font-weight:900;color:var(--blu);font-family:var(--ff)">🏢 '+fT+'</div></div>';
+if(fC)h+='<div style="background:rgba(0,200,83,.1);border:2px solid rgba(0,200,83,.3);border-radius:10px;padding:8px 16px;min-width:200px"><div style="font-size:7px;color:var(--t3);text-transform:uppercase;font-weight:700;letter-spacing:1px">Circuit Favori</div><div style="font-size:12px;font-weight:900;color:var(--grn);font-family:var(--ff)">🏟️ '+fC+'</div></div>';
+h+='</div>';}
+h+='</div>';
+
+// Avatar selection
+var avs=["🏍️","🏎️","🔥","⚡","🦈","🐉","🦅","🎯","💀","👑","🌟","🏆","🎸","🐺","🦁","🐆","🏴‍☠️","🎪","🚀","🌊"];
+h+='<div class="cd" style="margin-top:8px"><div style="font-family:var(--ff);font-size:10px;font-weight:700;color:var(--yel);margin-bottom:4px">🎨 AVATAR</div><div style="display:flex;flex-wrap:wrap;gap:4px">';
+avs.forEach(function(a){h+='<button onclick="uAv(\''+a+'\')" style="width:34px;height:34px;border-radius:50%;border:'+(p.av===a?'2px solid var(--yel)':'2px solid var(--bd)')+';background:'+(p.av===a?'#1a1800':'var(--c2)')+';font-size:17px;cursor:pointer">'+a+'</button>';});
+h+='</div></div>';
+
+// Favorite Rider
+h+='<div class="cd"><div style="font-family:var(--ff);font-size:10px;font-weight:700;color:var(--yel);margin-bottom:4px">❤️ PILOTE FAVORI</div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:3px">';
+R.forEach(function(r){var sel=p.fav===r.id;h+='<button onclick="uFav('+r.id+')" style="padding:3px;border-radius:4px;border:'+(sel?'2px solid var(--yel)':'1px solid var(--bd)')+';background:'+(sel?'#1a1800':'var(--c1)')+';cursor:pointer;text-align:center;color:#fff">'+pAv(r,'pavXS')+'<div style="font-size:6px;font-weight:700;font-family:var(--ff);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(r.n||'?').split(' ').pop()+'</div></button>';});
+h+='</div></div>';
+
+// Favorite Team
+h+='<div class="cd"><div style="font-family:var(--ff);font-size:10px;font-weight:700;color:var(--blu);margin-bottom:4px">🏢 ÉQUIPE FAVORITE</div><div style="display:flex;flex-wrap:wrap;gap:3px">';
+TEAMS.forEach(function(t){var sel=p.favTeam===t;h+='<button onclick="uTeam(\''+t+'\')" style="padding:4px 8px;border-radius:4px;border:'+(sel?'2px solid var(--blu)':'1px solid var(--bd)')+';background:'+(sel?'rgba(41,121,255,.15)':'var(--c1)')+';cursor:pointer;color:'+(sel?'var(--blu)':'#ccc')+';font-size:9px;font-weight:700">'+t+'</button>';});
+h+='</div></div>';
+
+// Favorite Circuit
+h+='<div class="cd"><div style="font-family:var(--ff);font-size:10px;font-weight:700;color:var(--grn);margin-bottom:4px">🏟️ CIRCUIT FAVORI</div><div style="display:flex;flex-wrap:wrap;gap:3px">';
+CIRCUITS.forEach(function(c){var sel=p.favCircuit===c;h+='<button onclick="uCircuit(\''+c+'\')" style="padding:4px 8px;border-radius:4px;border:'+(sel?'2px solid var(--grn)':'1px solid var(--bd)')+';background:'+(sel?'rgba(0,200,83,.15)':'var(--c1)')+';cursor:pointer;color:'+(sel?'var(--grn)':'#ccc')+';font-size:9px;font-weight:700">'+c+'</button>';});
+h+='</div></div>';
+
+// Admin panel — only for "Mich" or first registered player
+var isAdmin=(p.nm.toLowerCase()==='mich'||S.p.indexOf(p)===0);
+if(isAdmin){
+h+='<div class="cd" style="margin-top:12px;border-color:var(--red)"><div style="font-family:var(--ff);font-size:10px;font-weight:700;color:var(--red);margin-bottom:6px">🔧 ADMIN — Gestion des comptes</div>';
+h+='<div style="font-size:8px;color:var(--t3);margin-bottom:6px">Toi seul vois cette section</div>';
+S.p.forEach(function(pl,idx){
+  var isSelf=pl.ph===S.u;
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 8px;background:var(--c2);border-radius:5px;margin-bottom:3px">';
+  h+='<div><span style="font-size:11px;font-weight:700;color:#fff">'+(pl.av||'👤')+' '+pl.nm+'</span>';
+  h+=' <span style="font-size:8px;color:var(--t3)">'+pl.tp+'pts • Niv.'+gl(pl.xp||0).l+'</span>';
+  if(isSelf)h+=' <span style="font-size:7px;color:var(--yel);font-weight:700">TOI</span>';
+  h+='</div>';
+  if(!isSelf)h+='<button onclick="deletePlayer('+idx+')" style="background:var(--red);color:#fff;border:none;border-radius:4px;padding:3px 8px;font-size:8px;font-weight:700;cursor:pointer;font-family:var(--ff)">SUPPRIMER</button>';
+  h+='</div>';
+});
+h+='<div style="margin-top:8px"><button onclick="viewBugs()" style="background:#1a0000;color:var(--red);border:1px solid var(--red);border-radius:6px;padding:6px 12px;font-size:9px;font-weight:700;cursor:pointer!important;font-family:var(--ff);width:100%">🐛 VOIR RAPPORTS DE BUGS</button></div>';
+h+='<div id="bugReports"></div>';
+h+='</div>';
+}
+document.getElementById("p-profile").innerHTML=h}catch(e){console.log('Profile error:',e);document.getElementById("p-profile").innerHTML='<div class="cd" style="padding:20px;text-align:center"><div style="color:var(--red)">Erreur profil: '+e.message+'</div><button class="bt br" style="margin-top:8px" onclick="nav(\'home\')">← Retour</button></div>'}}
+function uAv(a){var p=me();if(p){p.av=a;sv();rPr(p)}}
+function uFav(id){var p=me();if(p){p.fav=p.fav===id?null:id;sv();rPr(p)}}
+function uTeam(t){var p=me();if(p){p.favTeam=p.favTeam===t?null:t;sv();rPr(p)}}
+function uCircuit(c){var p=me();if(p){p.favCircuit=p.favCircuit===c?null:c;sv();rPr(p)}}
+
+function deletePlayer(idx){
+  try{
+    var pl=S.p[idx];
+    if(!pl)return;
+    if(pl.ph===S.u){alert("Tu ne peux pas supprimer ton propre compte !");return}
+    if(!confirm("Supprimer "+pl.nm+" ? ("+(pl.tp||0)+" pts)\n\nIrréversible !"))return;
+    try{if(typeof firebaseReady!=='undefined'&&firebaseReady&&db){db.ref("players/"+pl.ph.replace(/[^a-zA-Z0-9]/g,"_")).remove()}}catch(e){}
+    S.p.splice(idx,1);
+    sv();
+    rPr(me());
+  }catch(e){alert("Erreur: "+e.message)}
+}
+
+function viewBugs(){
+  var el=document.getElementById('bugReports');
+  if(!el)return;
+  if(el.innerHTML){el.innerHTML='';return}
+  // Load from Firebase
+  if(typeof firebaseReady!=='undefined'&&firebaseReady&&db){
+    db.ref('bugs').limitToLast(20).once('value',function(snap){
+      var data=snap.val();
+      if(!data){el.innerHTML='<div style="font-size:10px;color:var(--t3);padding:8px;text-align:center">Aucun bug signalé</div>';return}
+      var bugs=Object.values(data).reverse();
+      var h='';
+      bugs.forEach(function(b){
+        h+='<div style="background:var(--c2);border-radius:6px;padding:8px;margin-top:4px;border-left:3px solid var(--red)">';
+        h+='<div style="display:flex;justify-content:space-between;font-size:8px;color:var(--t3)"><span>👤 '+( b.user||'?')+'</span><span>📄 '+(b.page||'?')+'</span><span>'+new Date(b.time).toLocaleString()+'</span></div>';
+        h+='<div style="font-size:10px;font-weight:700;color:var(--yel);margin-top:3px">'+( b.type||'Bug')+'</div>';
+        h+='<div style="font-size:10px;color:#bbb;margin-top:2px">'+(b.desc||'')+'</div>';
+        if(b.err)h+='<div style="font-size:8px;color:#ff6666;margin-top:2px;font-family:monospace;background:#0a0a0a;padding:4px;border-radius:4px">'+(b.err)+'</div>';
+        h+='</div>';
+      });
+      el.innerHTML=h;
+    });
+  } else {
+    // Fallback to localStorage
+    var bugs=JSON.parse(localStorage.getItem('gp_bugs')||'[]').reverse();
+    if(!bugs.length){el.innerHTML='<div style="font-size:10px;color:var(--t3);padding:8px;text-align:center">Aucun bug signalé</div>';return}
+    var h='';
+    bugs.forEach(function(b){
+      h+='<div style="background:var(--c2);border-radius:6px;padding:8px;margin-top:4px;border-left:3px solid var(--red)">';
+      h+='<div style="display:flex;justify-content:space-between;font-size:8px;color:var(--t3)"><span>👤 '+(b.user||'?')+'</span><span>📄 '+(b.page||'?')+'</span><span>'+new Date(b.time).toLocaleString()+'</span></div>';
+      h+='<div style="font-size:10px;font-weight:700;color:var(--yel);margin-top:3px">'+(b.type||'Bug')+'</div>';
+      h+='<div style="font-size:10px;color:#bbb;margin-top:2px">'+(b.desc||'')+'</div>';
+      if(b.err)h+='<div style="font-size:8px;color:#ff6666;margin-top:2px;font-family:monospace;background:#0a0a0a;padding:4px;border-radius:4px">'+(b.err)+'</div>';
+      h+='</div>';
+    });
+    el.innerHTML=h;
+  }
+}
+
+/* ═══ LIVE RADIO ═══ */
+function rLive(){try{
+var live=G.find(function(g){return g.st==="live"});
+var h='<div style="font-family:var(--ff);font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:3px;text-align:center;margin-bottom:4px">🎙️ LIVE RADIO</div>';
+h+='<div style="text-align:center;font-size:10px;color:var(--t2);margin-bottom:12px">Commentaires en direct des sessions</div>';
+if(!live){h+='<div class="cd" style="text-align:center;padding:30px"><div style="font-size:40px;margin-bottom:8px">📻</div><div style="font-size:12px;color:var(--t3)">Aucun GP en cours. Reviens pendant un week-end de course !</div></div>';document.getElementById("p-live").innerHTML=h;return}
+// Live header
+h+='<div class="cd" style="border-color:var(--red);text-align:center;padding:16px"><span class="live-dot"></span> <span style="font-family:var(--ff);font-size:12px;font-weight:900;color:var(--red);text-transform:uppercase;letter-spacing:2px">'+(FL[live.cc]||'')+' '+live.n+'</span>';
+h+='<div style="font-size:10px;color:var(--t2);margin-top:4px">'+live.ci+' — Circuit Ayrton Senna de Goiânia</div></div>';
+// Audio player simulation
+h+='<div class="cd" style="padding:16px;text-align:center;background:linear-gradient(135deg,#1a0000,#0a0a0a);border-color:var(--red)">';
+h+='<div style="font-size:40px;margin-bottom:8px">📻</div>';
+h+='<div style="font-family:var(--ff);font-size:14px;font-weight:900;color:var(--yel);margin-bottom:6px">MOTOGP RACE RADIO</div>';
+h+='<div style="font-size:10px;color:var(--t2);margin-bottom:10px">Écoute les commentaires en direct</div>';
+h+='<div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap">';
+h+='<a href="https://www.motogp.com/en" target="_blank" class="bt br bsm" style="text-decoration:none">🔴 MotoGP VideoPass</a>';
+h+='<a href="https://www.eurosport.fr" target="_blank" class="bt bsm" style="text-decoration:none;background:var(--blu);color:#fff">📺 Eurosport/Discovery+</a>';
+h+='</div>';
+h+='<div style="font-size:8px;color:var(--t3);margin-top:8px">Les commentaires officiels sont disponibles via MotoGP VideoPass ou Eurosport/Discovery+</div>';
+h+='</div>';
+
+// Session status + live feed
+if(live.sessData){
+var sessSt=getSessSt(live);
+h+='<div style="font-family:var(--ff);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--t3);margin:12px 0 6px">📡 SESSIONS EN COURS</div>';
+live.sessData.forEach(function(s,i){
+var st2=sessSt[i]||0;
+var stLabel=st2===2?'✅ Terminée':st2===1?'🔴 EN DIRECT':'⏳ À venir';
+var stColor=st2===2?'var(--grn)':st2===1?'var(--red)':'var(--t3)';
+h+='<div class="cd" style="padding:8px 10px;cursor:pointer;'+(st2===1?'border-color:var(--red);animation:glow 2s infinite':'')+'" onclick="showSess('+live.id+','+i+')">';
+h+='<div style="display:flex;justify-content:space-between;align-items:center"><div><span style="font-family:var(--ff);font-size:11px;font-weight:900;color:'+stColor+'">'+s.name+'</span> <span style="font-size:9px;color:var(--t2)">'+s.cet+'</span></div><span style="font-size:8px;color:'+stColor+';font-weight:700">'+stLabel+'</span></div>';
+if(s.res&&st2===2){var top3=s.res.slice(0,3);
+h+='<div style="display:flex;gap:6px;margin-top:4px">';
+top3.forEach(function(res,j){var rd=R.find(function(x){return x.id===res.rid});if(!rd)return;var medals=["🥇","🥈","🥉"];
+h+='<span style="font-size:8px;color:var(--t2)">'+medals[j]+' '+(rd.n||'?').split(" ").pop()+' <span style="color:var(--yel)">'+res.t+'</span></span>';});
+h+='</div>';}
+h+='</div>';});
+}
+
+// Live text feed
+h+='<div style="font-family:var(--ff);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--t3);margin:12px 0 6px">📝 FIL EN DIRECT</div>';
+var feed=[
+{h:"Sam 20:50",t:"🏁 RÉSULTAT SPRINT: Márquez P1, DiGiannantonio P2, Martín P3, Bezzecchi P4, Ogura P5"},
+{h:"Sam 20:45",t:"🔥 Dernier tour ! Márquez dépasse DiGia et file vers la victoire !"},
+{h:"Sam 20:20",t:"🏁 SPRINT LANCÉ avec 1h20 de retard ! 15 tours de folie"},
+{h:"Sam 19:30",t:"🔧 Réparations en cours sur la ligne droite — trou dans l'asphalte !"},
+{h:"Sam 17:00",t:"🚨 ALERTE: Trou dans la piste sur la ligne droite ! Sprint reporté. Réparations en cours"},
+{h:"Sam 15:45",t:"📊 GRILLE: DiGia P1, Bez P2, MM93 P3, Quartararo P4, Martín P5"},
+{h:"Sam 15:35",t:"🏁 POLE DI GIANNANTONIO 1:17.410 record du circuit !"},
+{h:"Sam 15:30",t:"💥 CRASHES Q2: Márquez, Acosta, Bagnaia ET Martín tous au sol !"},
+{h:"Sam 15:06",t:"✅ Q1: Bezzecchi P1 et Di Giannantonio P2 passent en Q2"},
+{h:"Sam 14:50",t:"🏁 Q1 lancée — piste sèche, Bezzecchi attaque fort"},
+{h:"Sam 14:40",t:"✅ FP2 terminée — Márquez P1 en sec, Bezzecchi remonte"},
+{h:"Sam 14:10",t:"🏁 FP2 lancée — piste SÈCHE pour la première fois ce week-end"},
+{h:"Ven 21:00",t:"🌧️ Practice: Zarco P1, Márquez P2, Toprak P3 — Bezzecchi P20 → Q1"},
+{h:"Ven 17:05",t:"✅ FP1: Acosta P1 sur pneus pluie, session retardée 1h"}
+];
+feed.forEach(function(f){h+='<div style="padding:6px 8px;background:var(--c1);border:1px solid var(--bd);border-radius:6px;margin-bottom:3px;display:flex;gap:8px;align-items:flex-start"><span style="font-family:var(--ff);font-size:9px;font-weight:900;color:var(--yel);white-space:nowrap;min-width:55px">'+f.h+'</span><span style="font-size:10px;color:#bbb;line-height:1.4">'+f.t+'</span></div>';});
+
+document.getElementById("p-live").innerHTML=h}catch(e){document.getElementById("p-live").innerHTML='<div class="cd" style="padding:20px;text-align:center"><div style="font-size:40px;margin-bottom:8px">📻</div><div style="font-size:14px;color:var(--yel);font-weight:900">LIVE RADIO</div><div style="font-size:11px;color:var(--t3);margin-top:8px">Erreur: '+e.message+'</div></div>'}}
+// ═══ AUTO-REFRESH: updates sessions, countdown, quests every 30s ═══
+setInterval(function(){
+  // Auto-check quests + score chrono predictions
+  var p=me();
+  if(p){
+    if(!p.qd)p.qd=[];
+    var changed=false;
+    QS.forEach(function(q){
+      if(p.qd.indexOf(q.id)<0){try{if(q.ck(p)){p.qd.push(q.id);p.xp=(p.xp||0)+q.xp;changed=true}}catch(e){}}
+    });
+    // Auto-score chrono predictions when pole time is known
+    Object.keys(POLE_TIMES).forEach(function(gpId){
+      var key='chrono_'+gpId;
+      var scoreKey='chrono_scored_'+gpId;
+      if(S.mg[key]&&!S.mg[scoreKey]){
+        var pole=POLE_TIMES[gpId];
+        var pred=S.mg[key];
+        // Parse times to seconds
+        function toSec(t){try{t=String(t).trim();var nums=t.match(/\d+/g);if(!nums||nums.length<2)return 999;var m=parseInt(nums[0]);var s=parseInt(nums[1]);var ms=nums.length>2?parseInt(nums[2]):0;var msLen=nums.length>2?nums[2].length:0;var msFrac=msLen>0?ms/Math.pow(10,msLen):0;return m*60+s+msFrac}catch(e){return 999}}
+        var diff=Math.abs(toSec(pred)-toSec(pole));
+        S.mg[scoreKey]=diff;
+        if(diff<=0.5){p.xp=(p.xp||0)+50;changed=true;console.log('⏱️ Chrono Predictor: +50 XP! Diff='+diff.toFixed(3)+'s')}
+        else if(diff<=1.0){p.xp=(p.xp||0)+25;changed=true;console.log('⏱️ Chrono Predictor: +25 XP (±1s)')}
+        else if(diff<=2.0){p.xp=(p.xp||0)+10;changed=true;console.log('⏱️ Chrono Predictor: +10 XP (±2s)')}
+      }
+    });
+    
+    // Auto-score H2H
+    Object.keys(H2H_RESULTS).forEach(function(gpId){
+      var key='h2h_'+gpId;var scoreKey='h2h_scored_'+gpId;
+      if(S.mg[key]&&!S.mg[scoreKey]){
+        var picks=S.mg[key];var correct=0;var results=H2H_RESULTS[gpId];
+        picks.forEach(function(pick,i){if(results[i]===pick)correct++});
+        var xp=correct*15;p.xp=(p.xp||0)+xp;S.mg[scoreKey]=correct;changed=true;
+        console.log('⚔️ H2H: '+correct+'/4 correct → +'+xp+' XP');
+      }
+    });
+    // Auto-score Crash predictor
+    Object.keys(CRASH_RESULTS).forEach(function(gpId){
+      var key='crash_'+gpId;var scoreKey='crash_scored_'+gpId;
+      if(S.mg[key]&&!S.mg[scoreKey]){
+        var pick=S.mg[key];var actual=CRASH_RESULTS[gpId];
+        var correct=pick===actual;
+        if(correct){p.xp=(p.xp||0)+30}
+        S.mg[scoreKey]=correct;changed=true;
+        console.log('💥 Crash: '+(correct?'CORRECT +30 XP':'raté'));
+      }
+    });
+    // Auto-score Grid predictor
+    Object.keys(GRID_RESULTS).forEach(function(gpId){
+      var key='grid_'+gpId;var scoreKey='grid_scored_'+gpId;
+      if(S.mg[key]&&!S.mg[scoreKey]){
+        var picks=S.mg[key];var actual=GRID_RESULTS[gpId];var xp=0;
+        picks.forEach(function(pick,i){
+          if(pick===actual[i]){xp+=20}
+          else if(actual.indexOf(pick)>=0){xp+=10}
+        });
+        p.xp=(p.xp||0)+xp;S.mg[scoreKey]=xp;changed=true;
+        console.log('📋 Grid: +'+xp+' XP');
+      }
+    });
+
+    // Auto-score RACE chrono
+    Object.keys(RACE_FL_TIMES).forEach(function(gpId){
+      var key='chrono_race_'+gpId;var scoreKey='chrono_scored_race_'+gpId;
+      if(S.mg[key]&&!S.mg[scoreKey]){
+        var actual=RACE_FL_TIMES[gpId];var pred=S.mg[key];
+        var diff=Math.abs(toSec(pred)-toSec(actual));
+        S.mg[scoreKey]=diff;
+        var xp=diff<=0.5?50:diff<=1.0?25:diff<=2.0?10:0;
+        if(xp>0){p.xp=(p.xp||0)+xp;changed=true}
+      }
+    });
+    // Auto-score RACE H2H
+    Object.keys(RACE_H2H_RESULTS).forEach(function(gpId){
+      var key='h2h_race_'+gpId;var scoreKey='h2h_scored_race_'+gpId;
+      if(S.mg[key]&&!S.mg[scoreKey]){
+        var picks=S.mg[key];var correct=0;var results=RACE_H2H_RESULTS[gpId];
+        picks.forEach(function(pick,i){if(results[i]===pick)correct++});
+        var xp=correct*15;p.xp=(p.xp||0)+xp;S.mg[scoreKey]=correct;changed=true;
+      }
+    });
+    // Auto-score RACE crash
+    Object.keys(RACE_CRASH_RESULTS).forEach(function(gpId){
+      var key='crash_race_'+gpId;var scoreKey='crash_scored_race_'+gpId;
+      if(S.mg[key]&&!S.mg[scoreKey]){
+        var correct=S.mg[key]===RACE_CRASH_RESULTS[gpId];
+        if(correct){p.xp=(p.xp||0)+30}
+        S.mg[scoreKey]=correct;changed=true;
+      }
+    });
+    // Auto-score RACE top 5
+    Object.keys(RACE_TOP5_RESULTS).forEach(function(gpId){
+      var key='grid_race_'+gpId;var scoreKey='grid_scored_race_'+gpId;
+      if(S.mg[key]&&!S.mg[scoreKey]){
+        var picks=S.mg[key];var actual=RACE_TOP5_RESULTS[gpId];var xp=0;
+        picks.forEach(function(pick,i){if(pick===actual[i])xp+=20;else if(actual.indexOf(pick)>=0)xp+=10});
+        p.xp=(p.xp||0)+xp;S.mg[scoreKey]=xp;changed=true;
+      }
+    });
+if(changed)sv();
+  }
+  // Re-render current page to update statuses
+  if(vw==='home'||vw==='live'||vw==='session'||vw==='games'||vw==='quests')ren();
+},30000);
+
+// Show last update time
+function showUpdate(){
+  var el=document.getElementById('last-upd');
+  if(el)el.textContent='Mise à jour: '+new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+setInterval(showUpdate,1000);
+
+
+// ═══ FIREBASE REALTIME DATABASE + ANTHROPIC API AUTO-FETCH ═══
+// 🔧 CONFIGURATION: Remplace ces valeurs par celles de TON projet Firebase
+// Va sur https://console.firebase.google.com → Créer un projet → Realtime Database → Créer
+// Puis dans les règles, mets: {"rules":{".read":true,".write":true}}
+var FIREBASE_CONFIG={
+  apiKey:"AIzaSyDOKVl6PEmfX6jfZw0G8LE15722ef7obkc",
+  authDomain:"gp-entre-potes-2.firebaseapp.com",
+  databaseURL:"https://gp-entre-potes-2-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId:"gp-entre-potes-2",
+  storageBucket:"gp-entre-potes-2.firebasestorage.app",
+  messagingSenderId:"47998611793",
+  appId:"1:47998611793:web:9beaeeb643fdbb2b4de370"
+};
+
+var db=null;
+var firebaseReady=false;
+try{
+  if(typeof firebase!=='undefined'&&FIREBASE_CONFIG.apiKey!=="REMPLACE_PAR_TA_CLE_API"){
+    firebase.initializeApp(FIREBASE_CONFIG);
+    db=firebase.database();
+    firebaseReady=true;
+    console.log("🔥 Firebase connecté !");
+  }else{
+    console.log("⚠️ Firebase non configuré — mode local");
+  }
+}catch(e){console.log("Firebase init error:",e.message)}
+
+// ── FIREBASE: Écouter les résultats en temps réel ──
+function listenFirebase(){
+  if(!firebaseReady||!db)return;
+  var live=G.find(function(g){return g.st==="live"});
+  if(!live||!live.sessData)return;
+  
+  // Listen to all session results for current GP
+  db.ref("gp/"+live.id+"/sessions").on("value",function(snap){
+    var data=snap.val();
+    if(!data)return;
+    var updated=false;
+    Object.keys(data).forEach(function(key){
+      var idx=parseInt(key);
+      if(isNaN(idx)||!live.sessData[idx])return;
+      var sessData=data[key];
+      if(sessData.res&&sessData.res.length>0&&!live.sessData[idx].res){
+        live.sessData[idx].res=sessData.res;
+        if(sessData.weather)live.sessData[idx].weather=sessData.weather;
+        if(sessData.notes)live.sessData[idx].notes=sessData.notes;
+        updated=true;
+        console.log("🔥 Firebase: "+live.sessData[idx].name+" mis à jour ("+sessData.res.length+" pilotes)");
+      }
+    });
+    if(updated)ren();
+  });
+  
+  // Listen to live feed updates
+  db.ref("gp/"+live.id+"/feed").on("value",function(snap){
+    var data=snap.val();
+    if(data&&Array.isArray(data)){
+      liveFeed=data;
+      if(vw==='live')rLive();
+    }
+  });
+  
+  // Listen to shared chat
+  db.ref("chat").on("value",function(snap){
+    var data=snap.val();
+    if(data){S.ch=Object.values(data);if(vw==='chat')rCh(me())}
+  });
+  
+  // Listen to all players (multi-device sync)
+  db.ref("players").on("value",function(snap){
+    var data=snap.val();
+    if(data){S.p=Object.values(data);sv();if(vw==='standings'||vw==='home')ren()}
+  });
+}
+
+// ── FIREBASE: Sauvegarder données joueur ──
+function syncPlayerToFirebase(){
+  if(!firebaseReady||!db)return;
+  var p=me();
+  if(!p)return;
+  db.ref("players/"+p.ph.replace(/[^a-zA-Z0-9]/g,"_")).set(p);
+}
+
+// ── FIREBASE: Envoyer un message chat ──
+function sendChatFirebase(msg){
+  if(!firebaseReady||!db)return;
+  db.ref("chat").push(msg);
+}
+
+// ── ANTHROPIC API: Recherche automatique des résultats ──
+var lastFetch=0;
+var fetchInterval=180000; // 3 minutes
+var isFetching=false;
+
+async function fetchLiveResults(){
+  var live=G.find(function(g){return g.st==="live"});
+  if(!live||!live.sessData)return;
+  if(isFetching)return;
+  
+  var now=new Date();
+  var needsUpdate=false;
+  live.sessData.forEach(function(s){
+    var end=new Date(s.end);
+    if(now>=end&&!s.res)needsUpdate=true;
+  });
+  if(!needsUpdate)return;
+  
+  isFetching=true;
+  var el=document.getElementById('fetch-status');
+  if(el)el.innerHTML='<span style="color:var(--yel);font-size:8px;animation:pulse 1s infinite">🔄 Recherche résultats...</span>';
+  
+  try{
+    var sessInfo=live.sessData.map(function(s,i){
+      var end=new Date(s.end);
+      return s.name+"(idx:"+i+","+(now>=end?(s.res?"has_data":"NEED"):"upcoming")+")";
+    }).join(", ");
+    
+    var prompt="Give me the latest confirmed MotoGP results from the 2026 Brazilian GP at Goiania (March 20-22 2026). "
+    +"Sessions status: "+sessInfo+". "
+    +"For each session marked NEED, give full classification with lap times. "
+    +"Reply ONLY with valid JSON, no markdown: "
+    +'{"sessions":[{"idx":2,"name":"FP2","results":[{"rider":"Marquez","time":"1:18.234"},{"rider":"Martin","time":"1:18.301"}]},{"idx":3,"name":"Q1","results":[...]}]}';
+    
+    var resp=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",
+        max_tokens:3000,
+        messages:[{role:"user",content:prompt}],
+        tools:[{type:"web_search_20250305",name:"web_search"}]
+      })
+    });
+    
+    var data=await resp.json();
+    if(!data||!data.content)throw new Error("No content");
+    
+    var fullText=data.content.map(function(item){return item.type==="text"?item.text:""}).filter(Boolean).join("\n");
+    var clean=fullText.replace(/```json|```/g,"").trim();
+    var j1=clean.indexOf("{"),j2=clean.lastIndexOf("}")+1;
+    if(j1<0)throw new Error("No JSON");
+    var parsed=JSON.parse(clean.substring(j1,j2));
+    if(!parsed.sessions)throw new Error("No sessions");
+    
+    var updated=false;
+    parsed.sessions.forEach(function(sess){
+      if(!sess.results||!sess.results.length)return;
+      var idx=sess.idx;
+      if(idx===undefined||!live.sessData[idx]||live.sessData[idx].res)return;
+      
+      var newRes=[];
+      sess.results.forEach(function(r){
+        var name=(r.rider||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+        var rd=R.find(function(x){
+          var xn=x.n.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+          return xn.indexOf(name)>=0||name.indexOf(xn.split(" ").pop())>=0;
+        });
+        if(rd)newRes.push({rid:rd.id,t:r.time||""});
+      });
+      
+      if(newRes.length>=3){
+        live.sessData[idx].res=newRes;
+        updated=true;
+        // Push to Firebase so all users see it
+        if(firebaseReady&&db){
+          db.ref("gp/"+live.id+"/sessions/"+idx).set({res:newRes,updated:Date.now()});
+        }
+        console.log("✅ "+sess.name+": "+newRes.length+" résultats");
+      }
+    });
+    
+    if(updated){
+      if(el)el.innerHTML='<span style="color:var(--grn);font-size:8px">✅ Résultats mis à jour!</span>';
+      ren();
+    }else{
+      if(el)el.innerHTML='<span style="color:var(--t3);font-size:8px">Pas de nouveaux résultats</span>';
+    }
+  }catch(err){
+    console.log("Fetch error:",err);
+    if(el)el.innerHTML='<span style="color:var(--t3);font-size:8px">⏳ Réessai dans 3min</span>';
+  }
+  isFetching=false;
+  lastFetch=Date.now();
+}
+
+// Override chat to use Firebase
+var _origDoCh=doCh;
+doCh=function(){
+  var inp=document.getElementById("cI");
+  if(!inp||!inp.value.trim())return;
+  var msg={f:me().nm,m:inp.value.trim(),t:Date.now()};
+  S.ch.push(msg);
+  if(firebaseReady&&db)db.ref("chat").push(msg);
+  sv();rCh(me());
+};
+
+// Sync player to Firebase on save
+var _origSv=sv;
+sv=function(){
+  _origSv();
+  if(firebaseReady&&db){
+    var p=me();
+    if(p)db.ref("players/"+p.ph.replace(/[^a-zA-Z0-9]/g,"_")).set(p);
+  }
+};
+
+// Start auto-fetch cycle: every 3 min
+setInterval(fetchLiveResults,180000);
+setTimeout(fetchLiveResults,5000);
+// Also listen Firebase for updates from other users
+listenFirebase();
+
+ren();
+
+// ═══ MOTO-THEMED FLOATING ELEMENTS ═══
+(function(){
+var motoSVGs=[
+  // Tire/wheel
+  '<svg viewBox="0 0 30 30" width="W" height="W"><circle cx="15" cy="15" r="13" fill="none" stroke="C" stroke-width="2" opacity=".6"/><circle cx="15" cy="15" r="7" fill="none" stroke="C" stroke-width="1.5" opacity=".4"/><circle cx="15" cy="15" r="2" fill="C" opacity=".5"/></svg>',
+  // Helmet
+  '<svg viewBox="0 0 30 24" width="W" height="W"><path d="M15 2 C7 2 4 8 4 14 C4 18 7 20 10 21 L20 21 C23 20 26 18 26 14 C26 8 23 2 15 2Z" fill="C" opacity=".5"/><rect x="6" y="11" width="18" height="4" rx="2" fill="rgba(0,0,0,.4)"/></svg>',
+  // Exhaust pipe
+  '<svg viewBox="0 0 10 40" width="W" height="W"><rect x="3" y="0" width="4" height="35" rx="2" fill="C" opacity=".5"/><ellipse cx="5" cy="38" rx="5" ry="3" fill="C" opacity=".3"/></svg>',
+  // Piston
+  '<svg viewBox="0 0 20 30" width="W" height="W"><rect x="4" y="0" width="12" height="8" rx="2" fill="C" opacity=".5"/><rect x="7" y="8" width="6" height="16" fill="C" opacity=".4"/><rect x="3" y="24" width="14" height="6" rx="2" fill="C" opacity=".5"/></svg>',
+  // Checkered flag
+  '<svg viewBox="0 0 24 30" width="W" height="W"><rect x="10" y="6" width="3" height="24" rx="1" fill="C" opacity=".4"/><rect x="0" y="0" width="20" height="14" fill="C" opacity=".15"/><rect x="0" y="0" width="5" height="7" fill="C" opacity=".4"/><rect x="10" y="0" width="5" height="7" fill="C" opacity=".4"/><rect x="5" y="7" width="5" height="7" fill="C" opacity=".4"/><rect x="15" y="7" width="5" height="7" fill="C" opacity=".4"/></svg>',
+  // Number plate
+  '<svg viewBox="0 0 28 20" width="W" height="W"><rect x="0" y="0" width="28" height="20" rx="4" fill="C" opacity=".25"/><text x="14" y="15" text-anchor="middle" fill="C" font-family="sans-serif" font-weight="900" font-size="12" opacity=".6">GP</text></svg>'
+];
+var colors=['#e10600','#ffd700','#00c853','#2979ff','#ff6600','#7c3aed'];
+var container=document.getElementById('particles');
+if(!container)return;
+
+function spawn(){
+  var div=document.createElement('div');
+  div.className='particle beam';
+  var svg=motoSVGs[Math.floor(Math.random()*motoSVGs.length)];
+  var color=colors[Math.floor(Math.random()*colors.length)];
+  var size=Math.random()*20+15;
+  var left=Math.random()*96+2;
+  var duration=Math.random()*10+7;
+  var rotation=Math.random()*360;
+  var rotSpeed=Math.random()*720-360;
+  
+  svg=svg.replace(/W/g,String(Math.round(size))).replace(/C/g,color);
+  div.innerHTML=svg;
+  div.style.cssText='left:'+left+'%;bottom:-50px;animation-duration:'+duration+'s;filter:drop-shadow(0 0 6px '+color+'80);transform:rotate('+rotation+'deg);opacity:0';
+  container.appendChild(div);
+  
+  // Add rotation during float
+  var start=Date.now();
+  var rotInterval=setInterval(function(){
+    var elapsed=(Date.now()-start)/1000;
+    if(elapsed>duration){clearInterval(rotInterval);return}
+    div.style.transform='rotate('+(rotation+elapsed*rotSpeed/duration)+'deg)';
+  },50);
+  
+  setTimeout(function(){clearInterval(rotInterval);try{container.removeChild(div)}catch(e){}},duration*1000+500);
+}
+
+// Also keep some simple light orbs
+function spawnOrb(){
+  var div=document.createElement('div');
+  div.className='particle orb';
+  var color=colors[Math.floor(Math.random()*colors.length)];
+  var size=Math.random()*5+2;
+  var left=Math.random()*100;
+  var duration=Math.random()*8+5;
+  div.style.cssText='width:'+size+'px;height:'+size+'px;left:'+left+'%;bottom:-10px;background:'+color+';box-shadow:0 0 '+size*4+'px '+color+'80;animation-duration:'+duration+'s;opacity:0;border-radius:50%';
+  container.appendChild(div);
+  setTimeout(function(){try{container.removeChild(div)}catch(e){}},duration*1000+500);
+}
+
+setInterval(function(){spawn();spawnOrb()},1200);
+setInterval(spawnOrb,800);
+for(var i=0;i<6;i++)setTimeout(spawn,i*300);
+for(var i=0;i<8;i++)setTimeout(spawnOrb,i*150);
+})();
+</script>
